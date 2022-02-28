@@ -1,6 +1,69 @@
-.container{
-    background-image: linear-gradient(to bottom right, rgb(98, 235, 253), rgb(224, 1, 139));
-    height: 100vh;
+.wrapper{
+    position: relative;
     width: 100vw;
+    height: 100vh;
     overflow-x: hidden;
+    overflow-y: auto;
+    perspective: 10px;
+    
+}
+
+.header{
+    position: relative;
+    display: flex;
+    height: 100%;
+    transform-style: preserve-3d;
+    z-index: -1;
+}
+
+.title{
+    margin: 2rem;
+    font-family: 'adidas';
+    font-size: 3rem;
+}
+
+.fade{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom , rgb(70, 40, 110), rgb(194, 123, 168), rgb(200, 200, 200), rgb(0, 0, 0));
+    z-index: -10;
+    transform: translateZ(-13px) scale(2.5);
+}
+
+.sky{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    z-index: -10;
+    transform: translateZ(-13px) scale(2.5);
+}
+
+.particles{
+    position: absolute;
+    transform: translateZ(-13px) scale(2);
+}
+
+.image{
+    transform: translateZ(-12px) scale(2.3);
+}
+
+.skater{
+    transform: translateZ(-5px) scale(1.5) translateY(30px);
+}
+
+.image,
+.skater{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.text{
+    padding: 2rem;
+    font-size: 2rem;
+    background-color: #333;
 }

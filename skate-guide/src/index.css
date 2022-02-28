@@ -7,7 +7,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@font-face {
+  font-family: adidas;
+  src: url(./img/ADIDAS-UNITY.TTF);
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+*::-webkit-scrollbar {
+  width: .7rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #444444; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(93, 93, 93); 
+  border-radius: 1rem;
 }

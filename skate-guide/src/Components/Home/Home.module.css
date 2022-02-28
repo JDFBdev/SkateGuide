@@ -1,0 +1,6 @@
+.container{
+    background-image: linear-gradient(to bottom right, rgb(98, 235, 253), rgb(224, 1, 139));
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+}

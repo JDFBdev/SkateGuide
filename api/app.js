@@ -9,8 +9,8 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-// prueba conexion db
-const sequelize = require('./db');
+// Tricks routes
+app.use('/tricks', require('./routes/tricks'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

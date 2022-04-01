@@ -3,13 +3,13 @@ const router = express.Router();
 const db = require('../db');
 const Tricks = require('../models/tricks')
 
-router.get('/', (req, res) => 
-    Tricks.findAll()
-        .then(tricks => {
-            console.log(tricks);
-            res.sendStatus(200);
-        })
-        .catch(err => console.log(err))
-    );
+router.get('/', async (req, res) => {
+    let tricks = await Tricks.findAll();
+    if (tricks) {
+        res.send(tricks);
+    } else {
+        res.send("Error");
+    }
+})
 
 module.exports = router;

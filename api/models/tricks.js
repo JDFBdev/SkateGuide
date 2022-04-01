@@ -2,6 +2,10 @@ const { DataTypes } = require('sequelize');
 const db = require('../db');
 
 const Tricks = db.define('skate-tricks', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true
+  },
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -20,10 +24,6 @@ const Tricks = db.define('skate-tricks', {
   },
   type: {
     type: DataTypes.STRING
-  },
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true
   }
 })
 

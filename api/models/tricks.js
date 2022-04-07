@@ -4,7 +4,8 @@ const db = require('../db');
 const Tricks = db.define('skate-tricks', {
   id: {
     type: DataTypes.INTEGER,
-    primaryKey: true
+    primaryKey: true,
+    allowNull: false
   },
   name: {
     type: DataTypes.STRING,
@@ -23,7 +24,8 @@ const Tricks = db.define('skate-tricks', {
     allowNull: true
   },
   type: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull: false
   }
 })
 

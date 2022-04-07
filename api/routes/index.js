@@ -7,7 +7,7 @@ router.use('/tricks', tricks);
 
 /* GET home page. */
 router.get('*', (req, res) => {
-  res.status(404).send('Undefined Route');
+  res.status(200).send('/tricks');
 });
 
 module.exports = router;

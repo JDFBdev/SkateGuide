@@ -26,7 +26,7 @@ var server = http.createServer(app);
  */
 
 server.listen(port, () => {
-  console.log('%s listening at port 3001'); // eslint-disable-line no-console
+  console.log('listening at port 3001'); // eslint-disable-line no-console
 });
 server.on('error', onError);
 server.on('listening', onListening);

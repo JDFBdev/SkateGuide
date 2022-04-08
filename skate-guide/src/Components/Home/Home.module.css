@@ -11,49 +11,22 @@
 .header{
     position: relative;
     display: flex;
-    height: 100%;
+    height: 88%;
     transform-style: preserve-3d;
     z-index: -1;
 }
 
-.title{
-    margin: 2rem;
-    font-family: 'adidas';
-    font-size: 3rem;
-}
-
-.fade{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(to bottom , rgb(70, 40, 110), rgb(194, 123, 168), rgb(200, 200, 200), rgb(0, 0, 0));
-    z-index: -10;
-    transform: translateZ(-13px) scale(2.5);
-}
-
-.sky{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -10;
-    transform: translateZ(-13px) scale(2.5);
-}
-
-.particles{
-    position: absolute;
-    transform: translateZ(-13px) scale(2);
-}
-
-.image{
+.skatepark{
     transform: translateZ(-12px) scale(2.3);
+    margin-top: -2rem;
+    margin-left: -5%;
 }
 
 .skater{
-    transform: translateZ(-5px) scale(1.5) translateY(30px);
+    transform: translateZ(-5px) scale(1.4) translateY(-6rem) translateX(-5rem);
 }
 
-.image,
+.skatepark,
 .skater{
     position: absolute;
     height: 100%;
@@ -62,8 +35,85 @@
     z-index: -1;
 }
 
-.text{
-    padding: 2rem;
+.blueDiv,
+.smolBlueDiv{
+    border: solid;
+    border-width: .3rem;
+    border-color: #E6E7E8;
+    margin-top: -20rem;
+    margin-left: -20rem;
+    position: absolute;
+    width: 50rem;
+    height: 150vh;
+    background: rgb(2,0,36);
+    background: linear-gradient(250deg, rgb(1, 0, 20) 0%, rgba(28,46,131,1) 100%);
+    transform: rotate(-20deg);
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}
+
+.smolBlueDiv{
+    margin-left: 100vw;
+    background: linear-gradient(250deg, rgb(0, 0, 0) 20%, rgba(28,46,131,1) 100%);
+}
+
+.mainTitleContainer{
+    position: absolute;
+    margin-top: 20%;
+    margin-left: 4rem;
+}
+
+.mainTitle,
+.subtitle{
+    font-size: 7rem;
+    font-family: 'futura';
+    font-weight: lighter;
+    color:#E6E7E8;
+    margin:0;
+}
+
+.subtitle{
     font-size: 2rem;
+}
+
+.app{
+    border-radius: 3rem 3rem 0 0;
     background-color: #333;
+    min-height: 100vh;
+    padding: 1rem;
+    background: rgb(2,0,36);
+    background: linear-gradient(245deg, rgba(2,0,36,1) 0%, rgba(24,26,29,1) 0%, rgba(48,53,58,1) 100%);
+}
+
+.navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 95vw;
+    height: 5rem;
+}
+
+.navbarTitle{
+    color: #E6E7E8;
+    font-family: 'futura';
+    font-size: 3rem;
+    margin-top: 1rem;
+    margin-left: 2rem;
+    font-weight: lighter;
+}
+
+.btnOptions{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    background-color: #202327;
+    font-size: 2.5rem;
+    color:#E6E7E8;
+    padding: 0;
+    border: none;
+    border-radius: .5rem;
+    box-shadow: -3px -4px 10px #312d38, 4px 6px 10px #0d0c0f;
 }

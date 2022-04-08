@@ -3,6 +3,7 @@ import s from './Home.module.css';
 import skatepark from '../../img/backround.png';
 import skater from '../../img/skater.png';
 import { HiMenu } from 'react-icons/hi';
+import TrickBtn from '../TrickBtn/TrickBtn';
 
 export default function Home(){
     return (
@@ -21,6 +22,17 @@ export default function Home(){
                 <div className={s.navbar} >
                     <h1 className={s.navbarTitle}>The SB Trick Guide</h1>
                     <button className={s.btnOptions} ><HiMenu/></button>
+                </div>
+                <div className={s.tricksDiv}>
+                    <div className={s.tricksHeader}>
+                        <h3 className={s.tricksTitle} >Tricks</h3>
+                        <div className={s.line}/>
+                    </div>
+                    <div className={s.tricksGrid}>
+                        <TrickBtn name='Ollie' score={1} />
+                        <TrickBtn name='Backside Flip' score={2} />
+                        <TrickBtn name='Treflip' score={3} />
+                    </div>
                 </div>
             </div>
         </div>

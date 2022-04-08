@@ -11,7 +11,7 @@
 .header{
     position: relative;
     display: flex;
-    height: 88%;
+    height: 90%;
     transform-style: preserve-3d;
     z-index: -1;
 }
@@ -79,9 +79,8 @@
     border-radius: 3rem 3rem 0 0;
     background-color: #333;
     min-height: 100vh;
-    padding: 1rem;
     background: rgb(2,0,36);
-    background: linear-gradient(245deg, rgba(2,0,36,1) 0%, rgba(24,26,29,1) 0%, rgba(48,53,58,1) 100%);
+    background: linear-gradient(245deg, rgba(24,26,29,1) 0%, rgba(48,53,58,1) 100%);
 }
 
 .navbar{
@@ -89,16 +88,17 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 95vw;
-    height: 5rem;
+    width: 95%;
+    height: 10vh;
+    padding-left: 3rem;
+    padding-right: 2rem;
 }
 
 .navbarTitle{
     color: #E6E7E8;
     font-family: 'futura';
-    font-size: 3rem;
-    margin-top: 1rem;
-    margin-left: 2rem;
+    font-size: 3.5rem;
+    margin: 0;
     font-weight: lighter;
 }
 
@@ -116,4 +116,40 @@
     border: none;
     border-radius: .5rem;
     box-shadow: -3px -4px 10px #312d38, 4px 6px 10px #0d0c0f;
+    cursor: pointer;
+}
+
+.tricksDiv{
+    width: 60%;
+    height: fit-content;
+    margin-left: 3rem;
+    margin-top: 2rem;
+}
+
+.tricksHeader{
+    width: 8rem;
+    height: fit-content;
+    margin-bottom: 2.5rem;
+}
+
+.tricksTitle{
+    color: #E6E7E8;
+    font-family: 'futura';
+    font-size: 3rem;
+    margin: 0;
+    font-weight: lighter;
+    text-align: center;
+}
+
+.line{
+    width: 100%;
+    height: .3rem;
+    background: rgb(2,0,36);
+    background: linear-gradient(250deg, rgb(30, 30, 30) 0%, rgb(36, 58, 167) 100%);
+}
+
+.tricksGrid{
+    display: flex;
+    flex-direction: column;
+    gap: 1.7rem;
 }

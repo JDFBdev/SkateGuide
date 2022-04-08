@@ -3,7 +3,7 @@ import s from './TrickBtn.module.css';
 import skateboard from '../../img/skateboard.png';
 
 export default function TrickBtn({name, score}){
-    const [skates, setSkates] = useState([...Array(score).keys()])
+    const [skates] = useState([...Array(score).keys()])
 
     return(
         <div className={s.trick}>

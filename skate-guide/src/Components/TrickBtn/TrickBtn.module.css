@@ -1,0 +1,38 @@
+
+.trick{
+    height: 2rem;
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1.5rem;
+    border-radius: .5rem;
+    box-shadow: -4px -3px 15px #494949, 4px 6px 15px #0d0c0f;
+    padding-top: .7rem;
+    padding-bottom: .7rem;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+    cursor: pointer;
+}
+
+.trickName{
+    color: #E6E7E8;
+    font-family: 'futura';
+    font-size: 2rem;
+    margin: 0;
+    font-weight: lighter;
+}
+
+.emojis{
+    height: 65%;
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.skateboard{
+    width: auto;
+    height: 100%;
+}

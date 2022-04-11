@@ -43,7 +43,7 @@ export default function Home(){
                 </div>
             </div>
             <Modal>
-                <TrickPage/>
+                <TrickPage id={0}/>
             </Modal>
         </div>
     )

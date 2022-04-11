@@ -5,13 +5,19 @@ const axios = require('axios');
 
 export default function TrickPage({id}){
     const [trick, setTrick] = useState(null);
-    const [skates] = useState([...Array(trick.rating || 0).keys()]);
+    const [skates,setSkates] = useState([...Array(0).keys()]);
 
-    useEffect(async ()=>{
-        let promise = await axios.get(`http://localhost:3001/findTrick/${id}`)
-        let response = promise.data;
-        setTrick(response);
+    useEffect(()=>{
+        async function fetchData() {
+            let promise = await axios.get(`http://localhost:3001/findTrick/${id}`)
+            let response = promise.data;
+            setTrick(response);
+            setSkates([...Array(trick.rating).keys()])
+        }
+        fetchData();
     },[])
+
+    console.log(trick)
 
     return(
         <div className={s.container}>
@@ -22,7 +28,7 @@ export default function TrickPage({id}){
                 </div>
                 <div className={s.emojis} >
                     {
-                        skates.map(element => {
+                        skates?.map(element => {
                             return <img className={s.skateboard} src={skateboard} alt='skateboard Emoji'/>
                         })
                     }

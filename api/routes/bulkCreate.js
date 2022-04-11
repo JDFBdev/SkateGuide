@@ -4,7 +4,6 @@ const db = require('../db');
 const Tricks = require('../models/tricks')
 
 router.post('/', async (req, res) => {
-    let {data} = req.body;
     try {
         let trick = await Tricks.bulkCreate([
         {

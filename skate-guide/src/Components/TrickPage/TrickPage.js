@@ -1,21 +1,23 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import s from './TrickPage.module.css';
-import { HiMenu, HiChevronLeft } from "react-icons/hi";
 import skateboard from '../../img/skateboard.png';
+const axios = require('axios');
 
-export default function TrickPage(){
-    const [skates] = useState([...Array(3).keys()])
+export default function TrickPage({id}){
+    const [trick, setTrick] = useState(null);
+    const [skates] = useState([...Array(trick.rating || 0).keys()]);
+
+    useEffect(async ()=>{
+        let promise = await axios.get(`http://localhost:3001/findTrick/${id}`)
+        let response = promise.data;
+        setTrick(response);
+    },[])
 
     return(
         <div className={s.container}>
-            <div className={s.navBar}>
-                <button className={s.btnOptions} ><HiChevronLeft/></button>
-                <h3 className={s.navBarTitle} >The SB Trick Guide</h3>
-                <button className={s.btnOptions} ><HiMenu/></button>
-            </div>
             <div className={s.data}>
                 <div className={s.header}>
-                    <h3 className={s.title} >Ollie</h3>
+                    <h3 className={s.title} >{trick.name}</h3>
                     <div className={s.line}/>
                 </div>
                 <div className={s.emojis} >
@@ -25,10 +27,9 @@ export default function TrickPage(){
                         })
                     }
                 </div>
-                <div className={s.type} >Street</div>
+                <div className={s.type} >{trick.type}</div>
                 <p className={s.description} >
-                    The board rotates 360º in the backside direction,
-                    with an extra Kickflip rotation.
+                    {trick.description}
                 </p>
                 <div className={s.stances}>
                     <button className={s.stance}>Regular</button>
@@ -36,7 +37,7 @@ export default function TrickPage(){
                     <button className={s.stance}>Nollie</button>
                     <button className={s.stance}>Switch</button>
                 </div>
-                <iframe className={s.video} width="560" height="315" src="https://www.youtube.com/embed/VasSLuFO4wY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe className={s.video} width="560" height="315" src={trick.video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
         </div>

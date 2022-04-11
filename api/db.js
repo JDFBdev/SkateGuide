@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+require('dotenv').config();
 const {
     DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT
   } = process.env;
@@ -16,4 +17,7 @@ module.exports = new Sequelize({
             rejectUnauthorized: false
         }
      },
+    define: {
+        timestamps: false
+    }
   });

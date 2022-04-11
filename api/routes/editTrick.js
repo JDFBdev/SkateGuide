@@ -4,10 +4,13 @@ const db = require('../db');
 const Tricks = require('../models/tricks')
 
 router.post('/', async (req, res) => {
-    let {id} = req.body;
+    let {id, propiedad, valor} = req.body;
     try {
-        let trick = await Tricks.destroy({ where: { id } });
-        res.send(`El truco se borro correctamente`);
+        let trick = await Tricks.update(
+                { [propiedad] : valor},
+                { where: { id } }
+            )
+        res.send(`El truco se edito correctamente`);
     }
     catch(err){
         res.sendStatus(500).send(err);

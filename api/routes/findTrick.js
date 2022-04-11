@@ -3,11 +3,12 @@ const router = express.Router();
 const db = require('../db');
 const Tricks = require('../models/tricks')
 
-router.post('/', async (req, res) => {
-    let {id} = req.body;
+router.get('/:id', async (req, res) => {
+    let {id} = req.params;
+    console.log(id);
     try {
-        let trick = await Tricks.destroy({ where: { id } });
-        res.send(`El truco se borro correctamente`);
+        let trick = await Tricks.findOne({ where: { id } });
+        res.send(trick);
     }
     catch(err){
         res.sendStatus(500).send(err);

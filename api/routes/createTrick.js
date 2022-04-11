@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
             video,
             type
         })
-        .then(() =>res.send(`${name} registrado correctamente`))
+        res.send(`${name} registrado correctamente`);
     }
     catch(err){
         res.sendStatus(500).send(err);

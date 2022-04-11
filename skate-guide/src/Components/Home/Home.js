@@ -4,8 +4,15 @@ import skatepark from '../../img/backround.png';
 import skater from '../../img/skater.png';
 import { HiMenu } from 'react-icons/hi';
 import TrickBtn from '../TrickBtn/TrickBtn';
+import TrickPage from '../TrickPage/TrickPage';
+import { useModal } from 'react-hooks-use-modal';
 
 export default function Home(){
+    const [Modal, open] = useModal('root', {
+        preventScroll: true,
+        closeOnOverlayClick: true
+    });
+
     return (
         <div className={s.wrapper}>
             <div className={s.header}>
@@ -29,12 +36,15 @@ export default function Home(){
                         <div className={s.line}/>
                     </div>
                     <div className={s.tricksGrid}>
-                        <TrickBtn name='Ollie' score={1} />
-                        <TrickBtn name='Backside Flip' score={2} />
-                        <TrickBtn name='Treflip' score={3} />
+                        <TrickBtn name='Ollie' score={1} onClick={open} id={0} />
+                        <TrickBtn name='Backside Flip' score={2} id={12} />
+                        <TrickBtn name='Treflip' score={3} id={19}  />
                     </div>
                 </div>
             </div>
+            <Modal>
+                <TrickPage/>
+            </Modal>
         </div>
     )
 }

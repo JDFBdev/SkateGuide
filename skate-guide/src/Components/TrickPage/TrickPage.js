@@ -19,7 +19,7 @@ export default function TrickPage({id}){
     },[id])
 
     return(
-        <div className={s.container}>
+        <div className={s.container}> 
         {
             (trick.name === '') ? 
             <div>
@@ -50,7 +50,6 @@ export default function TrickPage({id}){
                         <button className={s.stance}>Nollie</button>
                         <button className={s.stance}>Switch</button>
                     </div>
-                    <iframe className={s.video} width="560" height="315" src={trick.video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </Transition>
         }

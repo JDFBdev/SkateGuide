@@ -22,9 +22,9 @@ export default function TrickPage({id}){
         <div className={s.container}>
         {
             (trick.name === '') ? 
-            <div className={s.loading}>
+            <div>
                 <Transition>
-                    <img alt='loadingskate'  src={skateboard}/>
+                    <img alt='loadingskate' className={s.loading}  src={skateboard}/>
                 </Transition>
             </div> :
             <Transition>

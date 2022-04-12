@@ -120,7 +120,7 @@
 }
 
 .tricksDiv{
-    width: 60%;
+    width: 100%;
     height: fit-content;
     margin-left: 3rem;
     margin-top: 2rem;
@@ -149,7 +149,7 @@
 }
 
 .tricksGrid{
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 1.7rem;
 }

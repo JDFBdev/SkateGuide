@@ -15,11 +15,9 @@ Login
  - Subir foto o elegir avatar
 
 ## Back
-Endpoint get All
- - Nombre
- - Descripcion
- - Dificultad/Puntaje
- - Video
+Crear Tabla Stances en pgadmin
+Crear Tabla Users en pgadmin
+Crear Tabla intermedia Users-Stances
 
 Endpoint post User
  - Mail

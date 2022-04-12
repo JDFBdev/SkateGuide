@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import s from './Home.module.css';
 import skatepark from '../../img/backround.png';
 import skater from '../../img/skater.png';
@@ -6,12 +6,24 @@ import { HiMenu } from 'react-icons/hi';
 import TrickBtn from '../TrickBtn/TrickBtn';
 import TrickPage from '../TrickPage/TrickPage';
 import { useModal } from 'react-hooks-use-modal';
+import axios from 'axios';
 
 export default function Home(){
+    const [selected, setSelected] = useState(0)
+    const [tricks, setTricks] = useState([]);
     const [Modal, open] = useModal('root', {
         preventScroll: true,
         closeOnOverlayClick: true
     });
+
+    useEffect(()=>{
+        async function fetchData() {
+            let promise = await axios.get(`http://localhost:3001/allTricks`)
+            let response = promise.data;
+            setTricks(response);
+        }
+        fetchData();
+    })
 
     return (
         <div className={s.wrapper}>
@@ -36,14 +48,16 @@ export default function Home(){
                         <div className={s.line}/>
                     </div>
                     <div className={s.tricksGrid}>
-                        <TrickBtn name='Ollie' score={1} onClick={open} id={0} />
-                        <TrickBtn name='Backside Flip' score={2} id={12} />
-                        <TrickBtn name='Treflip' score={3} id={19}  />
+                        {
+                            tricks?.map(t =>{
+                                return <TrickBtn name={t.name} score={t.rating} onClick={()=>{setSelected(t.id); open();}} />
+                            })
+                        }
                     </div>
                 </div>
             </div>
             <Modal>
-                <TrickPage id={0}/>
+                <TrickPage id={selected}/>
             </Modal>
         </div>
     )

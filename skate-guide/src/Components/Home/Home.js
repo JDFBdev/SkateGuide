@@ -23,7 +23,7 @@ export default function Home(){
             setTricks(response);
         }
         fetchData();
-    })
+    },[])
 
     return (
         <div className={s.wrapper}>

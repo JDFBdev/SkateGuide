@@ -19,41 +19,43 @@ export default function TrickPage({id}){
     },[id])
 
     return(
-        <div className={s.container}> 
-        {
-            (trick.name === '') ? 
-            <div>
+        <div className={s.modal}>
+            <iframe className={s.video} src={trick.video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
+            <div className={s.container}>
+            {
+                (trick.name === '') ? 
+                <div>
+                    <Transition>
+                        <img alt='loadingskate' className={s.loading}  src={skateboard}/>
+                    </Transition>
+                </div> :
                 <Transition>
-                    <img alt='loadingskate' className={s.loading}  src={skateboard}/>
+                    <div className={s.data}>
+                        <div className={s.header}>
+                            <h3 className={s.title} >{trick.name}</h3>
+                            <div className={s.line}/>
+                        </div>
+                        <div className={s.emojis} >
+                            {
+                                skates.map(element => {
+                                    return <img className={s.skateboard} src={skateboard} alt='skateboard Emoji'/>
+                                })
+                            }
+                        </div>
+                        <div className={s.type} >{trick.type}</div>
+                        <p className={s.description} >
+                            {trick.description}
+                        </p>
+                        <div className={s.stances}>
+                            <button className={s.stance}>Regular</button>
+                            <button className={s.stance}>Fakie</button>
+                            <button className={s.stance}>Nollie</button>
+                            <button className={s.stance}>Switch</button>
+                        </div>
+                    </div>
                 </Transition>
-            </div> :
-            <Transition>
-                <div className={s.data}>
-                    <div className={s.header}>
-                        <h3 className={s.title} >{trick.name}</h3>
-                        <div className={s.line}/>
-                    </div>
-                    <div className={s.emojis} >
-                        {
-                            skates.map(element => {
-                                return <img className={s.skateboard} src={skateboard} alt='skateboard Emoji'/>
-                            })
-                        }
-                    </div>
-                    <div className={s.type} >{trick.type}</div>
-                    <p className={s.description} >
-                        {trick.description}
-                    </p>
-                    <div className={s.stances}>
-                        <button className={s.stance}>Regular</button>
-                        <button className={s.stance}>Fakie</button>
-                        <button className={s.stance}>Nollie</button>
-                        <button className={s.stance}>Switch</button>
-                    </div>
-                </div>
-            </Transition>
-        }
+            }
+            </div>
         </div>
-            
     )
 }

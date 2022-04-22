@@ -5,7 +5,8 @@ const Stances = db.define('stances', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    allowNull: false
+    allowNull: false,
+    autoIncrement: true
   },
   name: {
     type: DataTypes.STRING,
@@ -20,5 +21,7 @@ const Stances = db.define('stances', {
     allowNull: false
   }
 })
+
+Users.sync({ force: false });
 
 module.exports = Stances;

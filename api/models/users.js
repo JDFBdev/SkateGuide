@@ -4,6 +4,7 @@ const db = require('../db');
 const Users = db.define('users', {
   id: {
     type: DataTypes.INTEGER,
+    autoIncrement: true,
     primaryKey: true,
     allowNull: false
   },
@@ -20,5 +21,7 @@ const Users = db.define('users', {
     allowNull: false
   }
 })
+
+Users.sync({ force: false });
 
 module.exports = Users;

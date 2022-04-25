@@ -55,6 +55,7 @@
     flex-direction: column;
     align-items: center;
     gap: 2.5rem;
+    margin-top: 1.5rem;
 }
 
 .header{
@@ -115,6 +116,7 @@
     padding-left: 2rem;
     padding-right: 2rem;
     border-radius: .8rem;
+    box-shadow: -4px -3px 10px #494949, 4px 6px 10px #0d0c0f;
 }
 
 .stance:hover{
@@ -127,9 +129,4 @@
     width: 100%;
     aspect-ratio: 16/9;
     border-radius: 1rem 1rem 0 0;
-    z-index: -1;
-}
-
-.video:focus{
-    z-index: 1;
 }

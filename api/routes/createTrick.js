@@ -7,7 +7,7 @@ router.post('/', async (req, res) => {
     let {id, name, rating, description, video, type} = req.body;
     id = 2;
     try {
-        let trick = await Tricks.create({
+        await Tricks.create({
             id,
             name,
             rating,

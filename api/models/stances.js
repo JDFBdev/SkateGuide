@@ -22,6 +22,6 @@ const Stances = db.define('stances', {
   }
 })
 
-Users.sync({ force: false });
+Stances.sync({ force: false });
 
 module.exports = Stances;

@@ -5,7 +5,7 @@ const Tricks = require('../models/tricks')
 
 router.post('/', async (req, res) => {
     try {
-        let trick = await Tricks.bulkCreate([
+        await Tricks.bulkCreate([
         {
             id : 0,
             name: 'Ollie',

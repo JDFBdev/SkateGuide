@@ -10,6 +10,7 @@ const findTrick = require('./findTrick');
 const register = require('./register');
 const login = require('./login');
 const deleteUser = require('./deleteUser');
+const bulkCreateStances = require('./bulkCreateStances');
 
 router.use('/AllTricks', AllTricks);
 router.use('/createTrick', createTrick);
@@ -20,6 +21,7 @@ router.use('/findTrick', findTrick);
 router.use('/register', register);
 router.use('/login', login);
 router.use('/deleteUser', deleteUser);
+router.use('/bulkCreateStances', bulkCreateStances);
 
 /* GET home page. */
 router.get('*', (req, res) => {

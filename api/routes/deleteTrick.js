@@ -6,7 +6,7 @@ const Tricks = require('../models/tricks')
 router.post('/', async (req, res) => {
     let {id} = req.body;
     try {
-        let trick = await Tricks.destroy({ where: { id } });
+        await Tricks.destroy({ where: { id } });
         res.send(`El truco se borro correctamente`);
     }
     catch(err){

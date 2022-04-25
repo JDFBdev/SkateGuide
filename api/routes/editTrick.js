@@ -6,7 +6,7 @@ const Tricks = require('../models/tricks')
 router.post('/', async (req, res) => {
     let {id, propiedad, valor} = req.body;
     try {
-        let trick = await Tricks.update(
+        await Tricks.update(
                 { [propiedad] : valor},
                 { where: { id } }
             )

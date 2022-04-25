@@ -29,4 +29,6 @@ const Tricks = db.define('skate-tricks', {
   }
 })
 
+Tricks.sync({ force: false });
+
 module.exports = Tricks;

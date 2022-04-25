@@ -19,7 +19,7 @@ router.post('/', async function(req, res) {
             }
         })
         if (crear == true) {
-            let user = await Users.create({
+            await Users.create({
                 username,
                 mail,
                 password

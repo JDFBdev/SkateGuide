@@ -7,14 +7,14 @@ import TrickBtn from '../TrickBtn/TrickBtn';
 import TrickPage from '../TrickPage/TrickPage';
 import { useModal } from 'react-hooks-use-modal';
 import axios from 'axios';
+import Log from '../Log/Log';
+import Transition from '../Transition/Transition';
 
 export default function Home(){
     const [selected, setSelected] = useState(0)
     const [tricks, setTricks] = useState([]);
-    const [Modal, open] = useModal('root', {
-        preventScroll: true,
-        closeOnOverlayClick: true
-    });
+    const [ModalTrick, openTrick] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
+    const [ModalLog, openLog] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
 
     useEffect(()=>{
         async function fetchData() {
@@ -34,13 +34,13 @@ export default function Home(){
                 <img className={s.skater} src={skater} alt='skater'/>
                 <div className={s.mainTitleContainer} >
                     <h1 className={s.mainTitle} >The SB<br/>Trick Guide</h1>
-                    <h4 className={s.subtitle} >Learn. Practice. Commit.</h4>
+                    <h4 className={s.subtitle} >Ayo do a kickflip!</h4>
                 </div>
             </div>
             <div className={s.app}>
                 <div className={s.navbar} >
                     <h1 className={s.navbarTitle}>The SB Trick Guide</h1>
-                    <button className={s.btnOptions} ><HiMenu/></button>
+                    <button className={s.btnOptions} onClick={openLog} ><HiMenu/></button>
                 </div>
                 <div className={s.tricksDiv}>
                     <div className={s.tricksHeader}>
@@ -50,15 +50,23 @@ export default function Home(){
                     <div className={s.tricksGrid}>
                         {
                             tricks?.map(t =>{
-                                return <TrickBtn name={t.name} score={t.rating} onClick={()=>{setSelected(t.id); open();}} />
+                                return <TrickBtn name={t.name} score={t.rating} onClick={()=>{setSelected(t.id); openTrick();}} />
                             })
                         }
                     </div>
                 </div>
             </div>
-            <Modal>
-                <TrickPage id={selected}/>
-            </Modal>
+            <ModalTrick>
+                <Transition>
+                    <TrickPage id={selected}/>
+                </Transition>
+            </ModalTrick>
+
+            <ModalLog>
+                <Transition>
+                    <Log/>
+                </Transition>
+            </ModalLog>
         </div>
     )
 }

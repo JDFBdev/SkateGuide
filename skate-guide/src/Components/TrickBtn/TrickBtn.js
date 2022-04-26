@@ -10,8 +10,8 @@ export default function TrickBtn({name, score, onClick}){
             <p className={s.trickName}>{name}</p>
             <div className={s.emojis} >
                 {
-                    skates.map(element => {
-                        return <img className={s.skateboard} src={skateboard} alt='skateboard Emoji'/>
+                    skates.map((element,i) => {
+                        return <img className={s.skateboard} src={skateboard} alt='skateboard Emoji' key={i} />
                     })
                 }
             </div>

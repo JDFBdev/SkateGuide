@@ -21,7 +21,7 @@ export default function TrickPage({id}){
     return(
         <div className={s.modal}>
             <div className={s.videoContainer}>
-                <iframe className={s.video} src={trick.video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
+                <iframe className={s.video} src={trick.video} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen/>
             </div>
             <div className={s.container}>
             {
@@ -39,8 +39,8 @@ export default function TrickPage({id}){
                         </div>
                         <div className={s.emojis} >
                             {
-                                skates.map(element => {
-                                    return <img className={s.skateboard} src={skateboard} alt='skateboard Emoji'/>
+                                skates.map((element,i) => {
+                                    return <img className={s.skateboard} src={skateboard} alt='skateboard Emoji' key={i}/>
                                 })
                             }
                         </div>

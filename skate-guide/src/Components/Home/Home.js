@@ -50,7 +50,7 @@ export default function Home(){
                     <div className={s.tricksGrid}>
                         {
                             tricks?.map(t =>{
-                                return <TrickBtn name={t.name} score={t.rating} onClick={()=>{setSelected(t.id); openTrick();}} />
+                                return <TrickBtn name={t.name} score={t.rating} onClick={()=>{setSelected(t.id); openTrick();}} key={t.name}/>
                             })
                         }
                     </div>

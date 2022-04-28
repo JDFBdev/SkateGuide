@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, Sequelize } = require('sequelize');
 const db = require('../db');
 
 const Users = db.define('users', {
@@ -22,6 +22,31 @@ const Users = db.define('users', {
   }
 })
 
-Users.sync({ force: false });
+const Stances = db.define('stances', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    allowNull: false,
+    autoIncrement: true
+  },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  stance: {
+    type: DataTypes.STRING,
+    allowNull : false
+  },
+  trick_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  }
+})
+
+Users.belongsToMany(Stances, {through: 'UserStances'});
+Stances.belongsToMany(Users, {through: 'UserStances'});
+
+db.sync({ force:false });
 
 module.exports = Users;
+module.exports = Stances;

@@ -48,5 +48,4 @@ Stances.belongsToMany(Users, {through: 'UserStances'});
 
 db.sync({ force:false });
 
-module.exports = Users;
-module.exports = Stances;
+module.exports = {Users, Stances};

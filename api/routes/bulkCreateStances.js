@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
-const Stances = require('../models/users');
+const {Stances} = require('../models/users');
 const Tricks = require('../models/tricks')
 
 router.post('/', async (req, res) => {

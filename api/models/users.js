@@ -22,7 +22,7 @@ const Users = db.define('users', {
   }
 })
 
-const Stances = db.define('stances', {
+const Stance = db.define('stance', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -43,9 +43,9 @@ const Stances = db.define('stances', {
   }
 })
 
-Users.belongsToMany(Stances, {through: 'UserStances'});
-Stances.belongsToMany(Users, {through: 'UserStances'});
+Users.belongsToMany(Stance, {through: 'UserStances'});
+Stance.belongsToMany(Users, {through: 'UserStances'});
 
 db.sync({ force:false });
 
-module.exports = {Users, Stances};
+module.exports = {Users, Stance};

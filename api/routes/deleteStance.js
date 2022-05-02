@@ -16,8 +16,8 @@ router.post('/', async function(req, res) {
                 id : stanceID
             }
         })
-        user.addStance(stance);
-        res.send("stance registrada correctamente");
+        user.removeStance(stance);
+        res.send("stance borrada correctamente");
     }
     catch(err){
         console.log(err);

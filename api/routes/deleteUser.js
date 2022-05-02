@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
-const Users = require('../models/users')
+const {Users} = require('../models/users')
 
 router.post('/', async (req, res) => {
     let {username} = req.body;

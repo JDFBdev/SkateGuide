@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../db');
-const Users = require('../models/users')
+const {Users} = require('../models/users')
 
 router.post('/', async function(req, res) {
     let {username, mail, password} = req.body;
@@ -10,11 +10,11 @@ router.post('/', async function(req, res) {
         await Promise.all([Users.findOne({ where : {username}}), Users.findOne({ where : {mail}})])
         .then(values =>{
             if (values[0] !== null) {
-                res.send("Nombre de Usuario no disponible");
+                res.send({message: "Nombre de Usuario no disponible", success: false});
                 crear = false;
             }
             if (values[1] !== null) {
-                res.send("Mail ya registrado");
+                res.send({message: "Mail ya registrado", success: false});
                 crear = false;
             }
         })
@@ -24,7 +24,7 @@ router.post('/', async function(req, res) {
                 mail,
                 password
             })
-            res.send(`${username} registrado correctamente`);
+            res.send({message: `${username} registrado correctamente` , success: true});
         }
     }
     catch(err){

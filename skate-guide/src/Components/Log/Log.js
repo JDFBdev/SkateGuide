@@ -25,7 +25,7 @@ export  function validate(input){
     if(input.pass1 === ''){
         errors.pass1 = 'Password is required'
     }
-    if(input.pass1.length < 8){
+    if(input.pass1.length >= 8){
         errors.pass1 = 'Password must be at least 8 characters long'
     }
     if(input.pass2 === ''){
@@ -85,6 +85,7 @@ export default function Log(){
             }
             else{
                 toast.success('Registro exitoso!')
+                setLog(true);
             }
         }
 

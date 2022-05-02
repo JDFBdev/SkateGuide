@@ -3,12 +3,13 @@ import s from './Log.module.css';
 import Transition from '../Transition/Transition';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import ReactTooltip from 'react-tooltip';
 
 export  function validate(input){
     let errors = {};
   
-    if(input.user === ''){
-        errors.user = 'Username is required'
+    if(input.user === '' && input.email === ''){
+        errors.user = 'Username or email are required'
     }
     if(input.pass === ''){
         errors.pass = 'Password is required'
@@ -16,16 +17,16 @@ export  function validate(input){
     if(input.username === ''){
         errors.username = 'Username is required'
     }
-    if(input.email === ''){
-        errors.email = 'Email is required'
-    }
     if (!/\S+@\S+\.\S+/.test(input.email)) {
         errors.email = 'Invalid Email';
+    }
+    if(input.email === ''){
+        errors.email = 'Email is required'
     }
     if(input.pass1 === ''){
         errors.pass1 = 'Password is required'
     }
-    if(input.pass1.length >= 8){
+    if(input.pass1.length < 8){
         errors.pass1 = 'Password must be at least 8 characters long'
     }
     if(input.pass2 === ''){
@@ -58,14 +59,13 @@ export default function Log(){
                 password: input.pass
             })
             let response = promise.data;
-            if (response === 'Usuario Inexistente'){
-                toast.error('Usuario Inexistente')
+            if (!response.success){
+                toast.error(response.message)
             }
-            else if (response === 'Contraseña incorrecta'){
-                toast.error('Contraseña incorrecta')
-            }
-            else{
+            else if(response.success){
                 toast.success('Logged In!')
+                sessionStorage.setItem('user', input.user)
+                window.location.reload(false);
             }
         }
 
@@ -77,15 +77,13 @@ export default function Log(){
             })
             let response = promise.data;
 
-            if (response === "Nombre de Usuario no disponible"){
-                toast.error("Nombre de Usuario no disponible")
-            }
-            else if (response === "Mail ya registrado"){
-                toast.error("Mail ya registrado")
+            if (!response.success){
+                toast.error(response.message)
             }
             else{
                 toast.success('Registro exitoso!')
                 setLog(true);
+                setErrors({})
             }
         }
 
@@ -101,14 +99,14 @@ export default function Log(){
                             <h1 className={s.title}>Log In</h1>
                             <div className={s.line}/>
                         </div>
-                        <input className={s.input} placeholder="User or Email..." onChange={handleInput} id='user' style={{border: errors.user ? 'solid 1px rgb(127, 44, 44)' : 'none'}} />
+                        <input className={s.input} placeholder="User or Email..." onChange={handleInput} id='user' style={{border: errors.user ? 'solid 1px rgb(127, 44, 44)' : 'solid 1px rgb(0, 0, 0, 0)'}} data-tip data-for='user'/>
                         <div className={s.passwordDiv}>
-                            <input className={s.input2} type="password" placeholder="Password..." onChange={handleInput} id='pass' style={{border: errors.pass ? 'solid 1px rgb(127, 44, 44)' : 'none'}}/>
+                            <input className={s.input2} type="password" placeholder="Password..." onChange={handleInput} id='pass' style={{border: errors.pass ? 'solid 1px rgb(127, 44, 44)' : 'solid 1px rgb(0, 0, 0, 0)'}} data-tip data-for='pass'/>
                             <p className={s.forgot}>Forgot Your Password?</p>
                         </div>
                         <div className={s.btnDiv}>
                             <button className={s.btnSubmit} onClick={handleSubmit} >Log In</button>
-                            <p className={s.signUp} onClick={()=>{setLog(false); setInput(prev=>({...prev, user: '', pass: ''})); }}>Or Sing Up</p>
+                            <p className={s.signUp} onClick={()=>{setLog(false); setErrors({}); setInput(prev=>({...prev, user: '', pass: ''})); }}>Or Sing Up</p>
                         </div>
                     </div>
                 </Transition>
@@ -121,16 +119,25 @@ export default function Log(){
                             <h1 className={s.title}>Sign Up</h1>
                             <div className={s.line}/>
                         </div>
-                        <input className={s.input} placeholder="Username..." onChange={handleInput} id='username'/>
-                        <input className={s.input} placeholder="Email..." onChange={handleInput} id='email'/>
-                        <input className={s.input} type="password" placeholder="Password..." onChange={handleInput} id='pass1'/>
-                        <input className={s.input} type="password" placeholder="Repeat Password..." onChange={handleInput} id='pass2'/>
+                        <input className={s.input} placeholder="Username..." onChange={handleInput} id='username'  style={{border: errors.username ? 'solid 1px rgb(127, 44, 44)' : 'solid 1px rgb(0, 0, 0, 0)'}} data-tip data-for='username'/>
+                        <input className={s.input} placeholder="Email..." onChange={handleInput} id='email' style={{border: errors.email ? 'solid 1px rgb(127, 44, 44)' : 'solid 1px rgb(0, 0, 0, 0)'}} data-tip data-for='email'/>
+                        <input className={s.input} type="password" placeholder="Password..." onChange={handleInput} id='pass1' style={{border: errors.pass1 ? 'solid 1px rgb(127, 44, 44)' : 'solid 1px rgb(0, 0, 0, 0)'}} data-tip data-for='pass1'/>
+                        <input className={s.input} type="password" placeholder="Repeat Password..." onChange={handleInput} id='pass2' style={{border: errors.pass2 ? 'solid 1px rgb(127, 44, 44)' : 'solid 1px rgb(0, 0, 0, 0)'}} data-tip data-for='pass2'/>
                         <div className={s.btnDiv}>
                             <button className={s.btnSubmit} onClick={handleSubmit}>Sign Up</button>
-                            <p className={s.signUp} onClick={()=>{setLog(true); setInput(prev=>({...prev, username: '', email: '', pass1: '', pass2: ''}))}}>Or Log In</p>
+                            <p className={s.signUp} onClick={()=>{setLog(true); setErrors({}); setInput(prev=>({...prev, username: '', email: '', pass1: '', pass2: ''}))}}>Or Log In</p>
                         </div>
                     </div>
                 </Transition>
+            }
+            {
+                Object.keys(errors).map((e)=>{
+                    return (
+                        <ReactTooltip key={e} id={e} place='top' effect="solid">
+                            {errors[e]}
+                        </ReactTooltip>
+                    )
+                })
             }
         </>
     )

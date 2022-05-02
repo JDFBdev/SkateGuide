@@ -15,6 +15,7 @@ export default function Home(){
     const [tricks, setTricks] = useState([]);
     const [ModalTrick, openTrick] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
     const [ModalLog, openLog] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
+    const [user, setUser] = useState()
 
     useEffect(()=>{
         async function fetchData() {
@@ -23,6 +24,9 @@ export default function Home(){
             setTricks(response);
         }
         fetchData();
+
+        let userStorage = sessionStorage.getItem('user');
+        setUser(userStorage);
     },[])
 
     return (
@@ -40,7 +44,12 @@ export default function Home(){
             <div className={s.app}>
                 <div className={s.navbar} >
                     <h1 className={s.navbarTitle}>The SB Trick Guide</h1>
-                    <button className={s.btnOptions} onClick={openLog} ><HiMenu/></button>
+                    {
+                        user ? 
+                        <button className={s.btnOptions}>{user}</button>:
+                        <button className={s.btnOptions} onClick={openLog} ><HiMenu/></button>
+                    }
+                    
                 </div>
                 <div className={s.tricksDiv}>
                     <div className={s.tricksHeader}>

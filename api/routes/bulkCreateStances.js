@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
-const {Stances} = require('../models/users');
+const {Stance} = require('../models/users');
 const Tricks = require('../models/tricks')
 
 router.post('/', async (req, res) => {
@@ -15,8 +15,6 @@ router.post('/', async (req, res) => {
         let trucosConStances = [];
         tricks.forEach(async (truco) => {
             for(let i=0; i < stances.length ; i++) {
-                // console.log(stance);
-                // console.log(truco.id);
                 trucosConStances.push(
                     {
                     name: truco.name,
@@ -26,7 +24,7 @@ router.post('/', async (req, res) => {
                 )
             }
         });
-        await Stances.bulkCreate(trucosConStances, {ignoreDuplicates: true});
+        await Stance.bulkCreate(trucosConStances, {ignoreDuplicates: true});
         res.send(`Trucos con stances registrados correctamente`);
 })
 

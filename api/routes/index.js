@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const AllTricks = require('./AllTricks');
+const allTricks = require('./allTricks');
 const createTrick = require('./createTrick');
 const deleteTrick = require('./deleteTrick');
 const bulkCreate = require('./bulkCreate');
@@ -11,8 +11,10 @@ const register = require('./register');
 const login = require('./login');
 const deleteUser = require('./deleteUser');
 const bulkCreateStances = require('./bulkCreateStances');
+const addStance = require('./addStance');
+const deleteStance = require('./deleteStance');
 
-router.use('/AllTricks', AllTricks);
+router.use('/allTricks', allTricks);
 router.use('/createTrick', createTrick);
 router.use('/deleteTrick', deleteTrick);
 router.use('/bulkCreate', bulkCreate);
@@ -22,6 +24,8 @@ router.use('/register', register);
 router.use('/login', login);
 router.use('/deleteUser', deleteUser);
 router.use('/bulkCreateStances', bulkCreateStances);
+router.use('/addStance', addStance);
+router.use('/deleteStance', deleteStance);
 
 /* GET home page. */
 router.get('*', (req, res) => {

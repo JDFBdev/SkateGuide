@@ -1,0 +1,38 @@
+.container{
+    width: 400px;
+    aspect-ratio: 3/3;
+    background: rgb(2,0,36);
+    background: linear-gradient(160deg, rgb(19, 20, 23) 0%, rgba(48,53,58,1) 100%);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 2rem;
+    padding: 1rem;
+}
+
+.userImg{
+    height: 7rem;
+    width: 7rem;
+    border-radius: 50%;
+    background-color: rgb(36, 58, 167);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'futura';
+    font-size: 1.5rem;
+}
+
+.title,
+.score{
+    color: white;
+    font-family: 'futura';
+    font-size: 2rem;
+    margin: 0;
+}
+
+.score{
+    font-size: 1.5rem;
+}

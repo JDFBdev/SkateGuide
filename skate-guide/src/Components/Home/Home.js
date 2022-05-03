@@ -9,12 +9,14 @@ import { useModal } from 'react-hooks-use-modal';
 import axios from 'axios';
 import Log from '../Log/Log';
 import Transition from '../Transition/Transition';
+import Profile from '../Profile/Profile';
 
 export default function Home(){
     const [selected, setSelected] = useState(0)
     const [tricks, setTricks] = useState([]);
     const [ModalTrick, openTrick] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
     const [ModalLog, openLog] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
+    const [ModalProfile, openProfile] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
     const [user, setUser] = useState()
 
     useEffect(()=>{
@@ -46,10 +48,9 @@ export default function Home(){
                     <h1 className={s.navbarTitle}>The SB Trick Guide</h1>
                     {
                         user ? 
-                        <button className={s.btnOptions}>{user}</button>:
+                        <div className={s.user} onClick={openProfile} >{user.charAt(0)}</div>:
                         <button className={s.btnOptions} onClick={openLog} ><HiMenu/></button>
                     }
-                    
                 </div>
                 <div className={s.tricksDiv}>
                     <div className={s.tricksHeader}>
@@ -76,6 +77,12 @@ export default function Home(){
                     <Log/>
                 </Transition>
             </ModalLog>
+
+            <ModalProfile>
+                <Transition>
+                    <Profile user={user}/>
+                </Transition>
+            </ModalProfile>
         </div>
     )
 }

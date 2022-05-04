@@ -8,26 +8,31 @@ router.get('/:id/:username', async (req, res) => {
     let {id, username} = req.params;
     let response = {}
     try {
-        let trick = await Tricks.findOne({ where: { id } });
-        response.trick = trick;
-        if (username) {
-            const user = await Users.findOne({
-                where: {
-                    username
-                }
-            })
-            response.stances = []
-            await user.getStances({where: {trick_id: id}}).forEach(stance => {
-                let objeto = {}
-                response.stances.push({
-                    stance : stance.stance,
-                    learned : true
-                })
-            });
-        }
+        var trick = await Tricks.findOne({ where: { id } });
+        var user = await Users.findOne({ where: { username } })
+        var stances = await user.getStances({where: {trick_id: id}})
     }
     catch(err){
         res.sendStatus(500).send(err);
+    }
+    response.trick = trick;
+    if (username) {
+        response.stances = {}
+        stances.forEach(stance => {  
+            response.stances[stance.dataValues.stance] = true;
+        });
+        if (!response.stances.hasOwnProperty('Regular')) {
+            response.stances.Regular = false;
+        }
+        if (!response.stances.hasOwnProperty('Fakie')) {
+            response.stances.Fakie = false;
+        }
+        if (!response.stances.hasOwnProperty('Nollie')) {
+            response.stances.Nollie = false;
+        }
+        if (!response.stances.hasOwnProperty('Switch')) {
+            response.stances.Switch = false;
+        }
     }
     res.send(response);
 })

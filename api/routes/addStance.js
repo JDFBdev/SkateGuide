@@ -17,10 +17,10 @@ router.post('/', async function(req, res) {
             }
         })
         user.addStance(stance);
-        res.send("stance registrada correctamente");
+        res.send({message: "Stance updated", success: true});
     }
     catch(err){
-        console.log(err);
+        res.send({message: "Error updating stance", success: false})
     }
 });
 

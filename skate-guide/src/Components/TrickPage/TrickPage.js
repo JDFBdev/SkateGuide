@@ -4,7 +4,7 @@ import skateboard from '../../img/skateboard.png';
 import Transition from '../Transition/Transition';
 import axios from 'axios';
 
-export default function TrickPage({id}){
+export default function TrickPage({id, user}){
     const [trick, setTrick] = useState({name: '', rating: 0, description: '', type: '', video: ''});
     const [skates,setSkates] = useState([...Array(0).keys()]);
 
@@ -12,6 +12,7 @@ export default function TrickPage({id}){
         async function fetchData() {
             let promise = await axios.get(`http://localhost:3001/findTrick/${id}`)
             let response = promise.data;
+            console.log(response)
             setTrick(response);
             setSkates([...Array(response.rating).keys()])
         }

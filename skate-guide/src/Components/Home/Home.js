@@ -17,7 +17,7 @@ export default function Home(){
     const [ModalTrick, openTrick] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
     const [ModalLog, openLog] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
     const [ModalProfile, openProfile] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
-    const [user, setUser] = useState()
+    const [user, setUser] = useState(false)
 
     useEffect(()=>{
         async function fetchData() {
@@ -68,7 +68,7 @@ export default function Home(){
             </div>
             <ModalTrick>
                 <Transition>
-                    <TrickPage id={selected}/>
+                    <TrickPage id={selected} user={user}/>
                 </Transition>
             </ModalTrick>
 

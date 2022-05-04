@@ -6,7 +6,7 @@
     justify-content: space-around;
     align-items: center;
     gap: 1.5rem;
-    border-radius: .5rem;
+    border-radius: .8rem;
     box-shadow: -3px -3px 3px #494949, 4px 6px 3px #0d0c0f;
     padding-top: .7rem;
     padding-bottom: .7rem;
@@ -24,7 +24,7 @@
 .trickName{
     color: #E6E7E8;
     font-family: 'futura';
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin: 0;
     font-weight: lighter;
 }

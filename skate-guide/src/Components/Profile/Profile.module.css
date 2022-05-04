@@ -1,6 +1,6 @@
 .container{
     width: 400px;
-    aspect-ratio: 3/3;
+    height: fit-content;
     background: rgb(2,0,36);
     background: linear-gradient(160deg, rgb(19, 20, 23) 0%, rgba(48,53,58,1) 100%);
     display: flex;
@@ -9,6 +9,9 @@
     align-items: center;
     border-radius: 2rem;
     padding: 1rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    gap: 1rem;
 }
 
 .userImg{
@@ -20,14 +23,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #E6E7E8;
     font-family: 'futura';
     font-size: 1.5rem;
 }
 
 .title,
 .score{
-    color: white;
+    color: #E6E7E8;
     font-family: 'futura';
     font-size: 2rem;
     margin: 0;
@@ -35,4 +38,16 @@
 
 .score{
     font-size: 1.5rem;
+}
+
+.btn{
+    width: 80%;
+    height: 3rem;
+    border: none;
+    border-radius: .6rem;
+    background-color: #787878;
+    color: #E6E7E8;
+    font-family: 'futura';
+    font-size: 1.4rem;
+    cursor: pointer;
 }

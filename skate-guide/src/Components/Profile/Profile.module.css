@@ -1,8 +1,7 @@
 .container{
     width: 400px;
     height: fit-content;
-    background: rgb(2,0,36);
-    background: linear-gradient(160deg, rgb(19, 20, 23) 0%, rgba(48,53,58,1) 100%);
+    background: #1C1D31;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -18,21 +17,21 @@
     height: 7rem;
     width: 7rem;
     border-radius: 50%;
-    background-color: rgb(36, 58, 167);
+    background-color: #C91865;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     color: #E6E7E8;
-    font-family: 'futura';
-    font-size: 1.5rem;
+    font-family: 'bebas';
+    font-size: 3rem;
 }
 
 .title,
 .score{
     color: #E6E7E8;
-    font-family: 'futura';
-    font-size: 2rem;
+    font-family: 'bebas';
+    font-size: 3rem;
     margin: 0;
 }
 
@@ -47,7 +46,7 @@
     border-radius: .6rem;
     background-color: #787878;
     color: #E6E7E8;
-    font-family: 'futura';
+    font-family: 'bebas';
     font-size: 1.4rem;
     cursor: pointer;
 }

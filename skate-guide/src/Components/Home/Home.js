@@ -27,7 +27,7 @@ export default function Home(){
         }
         fetchData();
 
-        let userStorage = sessionStorage.getItem('user');
+        let userStorage = sessionStorage.getItem('user') || null;
         setUser(userStorage);
     },[])
 

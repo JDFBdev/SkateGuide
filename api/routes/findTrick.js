@@ -4,21 +4,25 @@ const db = require('../db');
 const Tricks = require('../models/tricks')
 const {Users} = require('../models/users')
 
-router.get('/', async (req, res) => {
+router.get('/:id/:username', async (req, res) => {
     let {id, username} = req.params;
     let response = {}
+
     try {
         var trick = await Tricks.findOne({ where: { id } });
         var user = await Users.findOne({ where: { username } })
-        var stances = await user.getStances({where: {trick_id: id}})
+        if (user) {
+            var stances = await user.getStances({where: {trick_id: id}})
+        }
     }
     catch(err){
-        res.sendStatus(500).send(err);
+        console.log(err)
     }
+
     response.trick = trick;
-    if (username) {
+    if (user) {
         response.stances = {}
-        stances.forEach(stance => {  
+        stances?.forEach(stance => {  
             response.stances[stance.dataValues.stance] = true;
         });
         if (!response.stances.hasOwnProperty('Regular')) {

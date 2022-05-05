@@ -4,19 +4,20 @@ const db = require('../db');
 const {Users, Stance} = require('../models/users');
 
 router.post('/', async function(req, res) {
-    let {username, stanceID} = req.body;
+    let {username, trick_id, stance} = req.body;
     try {
         const user = await Users.findOne({
             where: {
                 username
             }
         })
-        const stance = await Stance.findOne({
+        const stanceUser = await Stance.findOne({
             where: {
-                id : stanceID
+                trick_id,
+                stance
             }
         })
-        user.addStance(stance);
+        user.addStance(stanceUser);
         res.send({message: "Stance updated", success: true});
     }
     catch(err){

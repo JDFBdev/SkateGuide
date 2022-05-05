@@ -7,7 +7,7 @@
     align-items: center;
     gap: 1.5rem;
     border-radius: .8rem;
-    box-shadow: -3px -3px 3px #494949, 4px 6px 3px #0d0c0f;
+    box-shadow: -3px -3px 3px #373960, 4px 6px 3px #0d0c0f;
     padding-top: .7rem;
     padding-bottom: .7rem;
     padding-left: 1.2rem;
@@ -17,20 +17,20 @@
 }
 
 .trick:hover{
-    box-shadow: inset 5px 5px 5px #1b1a1a, inset -5px -5px 5px #373737;
+    box-shadow: inset 5px 5px 5px #0d0c0f, inset -5px -5px 5px #373960;
     transition: box-shadow 1s ease-in-out;
 }
 
 .trickName{
     color: #E6E7E8;
-    font-family: 'futura';
+    font-family: 'bebas';
     font-size: 1.8rem;
     margin: 0;
     font-weight: lighter;
 }
 
 .emojis{
-    height: 65%;
+    height: 70%;
     width: fit-content;
     display: flex;
     flex-direction: row;

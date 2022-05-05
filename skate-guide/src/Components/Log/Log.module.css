@@ -26,7 +26,7 @@
 .title{
     margin: 0;
     color: #E6E7E8;
-    font-family: 'futura';
+    font-family: 'bebas';
     font-size: 3rem;
     font-weight: lighter;
     text-align: center;
@@ -49,7 +49,7 @@
     outline: none;
 
     color: #E6E7E8;
-    font-family: 'futura';
+    font-family: 'bebas';
     font-size: 1.5rem;
     font-weight: lighter;
     text-indent: 1rem;
@@ -72,7 +72,7 @@
 .forgot,
 .signUp{
     color: #b1b1b1;
-    font-family: 'futura';
+    font-family: 'bebas';
     font-size: 1rem;
     font-weight: lighter;
     margin-top: .5rem;
@@ -91,7 +91,7 @@
 
 .btnSubmit{
     color: #E6E7E8;
-    font-family: 'futura';
+    font-family: 'bebas';
     font-size: 1.5rem;
     font-weight: lighter;
     width: 100%;

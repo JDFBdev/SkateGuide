@@ -12,6 +12,11 @@ body {
   src: url(./img/FUTURA\ BK\ BT\ BOOK.TTF);
 }
 
+@font-face {
+  font-family: bebas;
+  src: url(./img/BebasNeue-Regular.ttf);
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

@@ -65,7 +65,7 @@
 .mainTitle,
 .subtitle{
     font-size: 7rem;
-    font-family: 'futura';
+    font-family: 'bebas';
     font-weight: lighter;
     color:#E6E7E8;
     margin:0;
@@ -79,8 +79,7 @@
     border-radius: 3rem 3rem 0 0;
     background-color: #333;
     min-height: 100vh;
-    background: rgb(2,0,36);
-    background: linear-gradient(245deg, rgba(24,26,29,1) 0%, rgba(48,53,58,1) 100%);
+    background: #1C1D31;
 }
 
 .navbar{
@@ -96,7 +95,7 @@
 
 .navbarTitle{
     color: #E6E7E8;
-    font-family: 'futura';
+    font-family: 'bebas';
     font-size: 3.5rem;
     margin: 0;
     font-weight: lighter;
@@ -109,7 +108,7 @@
     justify-content: center;
     width: 3rem;
     height: 3rem;
-    background-color: #202327;
+    background-color: #00000000;
     font-size: 2.5rem;
     color:#E6E7E8;
     padding: 0;
@@ -129,7 +128,7 @@
     align-items: center;
     justify-content: center;
     color: white;
-    font-family: 'futura';
+    font-family: 'bebas';
     font-size: 1.5rem;
     cursor: pointer;
 }
@@ -149,7 +148,7 @@
 
 .tricksTitle{
     color: #E6E7E8;
-    font-family: 'futura';
+    font-family: 'bebas';
     font-size: 3rem;
     margin: 0;
     font-weight: lighter;
@@ -159,8 +158,7 @@
 .line{
     width: 100%;
     height: .3rem;
-    background: rgb(2,0,36);
-    background: linear-gradient(250deg, rgb(30, 30, 30) 0%, rgb(36, 58, 167) 100%);
+    background: #C91865
 }
 
 .tricksGrid{

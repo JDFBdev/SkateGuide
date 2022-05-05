@@ -7,7 +7,7 @@ const {Users} = require('../models/users')
 router.get('/:id/:username', async (req, res) => {
     let {id, username} = req.params;
     let response = {}
-
+    
     try {
         var trick = await Tricks.findOne({ where: { id } });
         var user = await Users.findOne({ where: { username } })

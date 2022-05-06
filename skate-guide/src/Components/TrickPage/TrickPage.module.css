@@ -116,7 +116,18 @@
     padding-left: 2rem;
     padding-right: 2rem;
     border-radius: .8rem;
-    box-shadow: -3px -3px 3px #373960, 4px 6px 3px #0d0c0f;
+    transition: .2s ease-in-out;
+    box-shadow: -3px -3px 4px #373960,
+                -3px -3px 4px #373960,
+                5px 5px 4px #0d0c0f,
+                5px 5px 4px #0d0c0f;
+}
+
+.stance:hover{
+    box-shadow: -2px -2px 4px #373960,
+    -2px -2px 4px #373960,
+    2px 2px 4px #0d0c0f,
+    2px 2px 4px #0d0c0f;
 }
 
 .stanceLearned{
@@ -125,7 +136,10 @@
     padding-left: 2rem;
     padding-right: 2rem;
     border-radius: .8rem;
-    box-shadow: inset 5px 5px 5px #0d0c0f, inset -5px -5px 5px #373960;
+    box-shadow: inset -2px -2px 6px #373960,
+    inset -2px -2px 4px #373960,
+    inset 2px 2px 2px #0d0c0f,
+    inset 2px 2px 4px #0d0c0f;
 }
 
 .video{

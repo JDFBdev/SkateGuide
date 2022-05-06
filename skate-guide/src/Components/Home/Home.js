@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import s from './Home.module.css';
 import skatepark from '../../img/backround.png';
 import skater from '../../img/skater.png';
-import { HiMenu } from 'react-icons/hi';
+import { HiOutlineUser } from 'react-icons/hi';
 import TrickBtn from '../TrickBtn/TrickBtn';
 import TrickPage from '../TrickPage/TrickPage';
 import { useModal } from 'react-hooks-use-modal';
@@ -18,12 +18,15 @@ export default function Home(){
     const [ModalLog, openLog] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
     const [ModalProfile, openProfile] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
     const [user, setUser] = useState(false)
+    const [leaderboard, setLeaderboard] = useState([{name:'Rodney', score: 74}, {name:'Tony', score: 58}])
 
     useEffect(()=>{
         async function fetchData() {
-            let promise = await axios.get(`http://localhost:3001/allTricks`)
-            let response = promise.data;
-            setTricks(response);
+            await Promise.all([axios.get(`http://localhost:3001/allTricks`), axios.get(`http://localhost:3001/leaderboard`)])
+            .then(values=>{
+                setTricks(values[0].data);
+                setLeaderboard(values[1].data)
+            })
         }
         fetchData();
 
@@ -49,18 +52,47 @@ export default function Home(){
                     {
                         user ? 
                         <div className={s.user} onClick={openProfile} >{user.charAt(0)}</div>:
-                        <button className={s.btnOptions} onClick={openLog} ><HiMenu/></button>
+                        <button className={s.btnOptions} onClick={openLog} ><HiOutlineUser size='2rem'/></button>
                     }
                 </div>
-                <div className={s.tricksDiv}>
-                    <div className={s.tricksHeader}>
-                        <h3 className={s.tricksTitle} >Tricks</h3>
-                        <div className={s.line}/>
+                <div className={s.appData}>
+                    <div className={s.tricksDiv}>
+                        <div className={s.tricksHeader}>
+                            <h3 className={s.tricksTitle} >Tricks</h3>
+                            <div className={s.line}/>
+                        </div>
+                        <div className={s.filters}>
+                            <button className={s.filter}>Difficulty</button>
+                            <button className={s.filter}>Street</button>
+                            <button className={s.filter}>Grind</button>
+                            <button className={s.filter}>Vert</button>
+                            <button className={s.filter}>Freestyle</button>
+                        </div>
+                        <div className={s.tricksGrid}>
+                            {
+                                tricks?.map((t,i) =>{
+                                    return (
+                                    <Transition timeout={i*15}>
+                                        <TrickBtn name={t.name} score={t.rating} onClick={()=>{setSelected(t.id); openTrick();}} key={t.name}/>
+                                    </Transition>
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
-                    <div className={s.tricksGrid}>
+                    <div className={s.leaderboard}>
+                    <div className={s.leaderboardHeader}>
+                            <h3 className={s.tricksTitle} >Leaderboard</h3>
+                            <div className={s.line}/>
+                        </div>
                         {
-                            tricks?.map(t =>{
-                                return <TrickBtn name={t.name} score={t.rating} onClick={()=>{setSelected(t.id); openTrick();}} key={t.name}/>
+                            leaderboard?.map((u)=>{
+                                return (
+                                    <div className={s.userLeaderboard}>
+                                        <p className={s.nameLeaderboard}>{u.name}</p>
+                                        <p className={s.scoreLeaderboard}>{u.score}</p>
+                                    </div>
+                                )
                             })
                         }
                     </div>

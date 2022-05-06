@@ -65,9 +65,12 @@ export default function TrickPage({id, user}){
     return(
         <div className={s.modal}>
             <div className={s.videoContainer}>
-                <iframe className={s.video} src={trick.video} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen/>
+                {
+                    (trick.name !== '') &&
+                    <iframe className={s.video} src={trick.video} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen/>
+                }
+                
             </div>
-
             <div className={s.container}>
             {
                 (trick.name === '') ? 

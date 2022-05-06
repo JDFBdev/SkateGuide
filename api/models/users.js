@@ -19,6 +19,10 @@ const Users = db.define('users', {
   password: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  points: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
 })
 
@@ -36,6 +40,10 @@ const Stance = db.define('stance', {
   stance: {
     type: DataTypes.STRING,
     allowNull : false
+  },
+  rating: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   },
   trick_id: {
     type: DataTypes.INTEGER,

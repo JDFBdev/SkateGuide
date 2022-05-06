@@ -13,6 +13,7 @@ const deleteUser = require('./deleteUser');
 const bulkCreateStances = require('./bulkCreateStances');
 const addStance = require('./addStance');
 const deleteStance = require('./deleteStance');
+const leaderboard = require('./leaderboard');
 
 router.use('/allTricks', allTricks);
 router.use('/createTrick', createTrick);
@@ -26,6 +27,7 @@ router.use('/deleteUser', deleteUser);
 router.use('/bulkCreateStances', bulkCreateStances);
 router.use('/addStance', addStance);
 router.use('/deleteStance', deleteStance);
+router.use('/leaderboard', leaderboard);
 
 /* GET home page. */
 router.get('*', (req, res) => {

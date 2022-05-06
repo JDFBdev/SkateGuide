@@ -5,24 +5,40 @@ const {Users, Stance} = require('../models/users');
 
 router.post('/', async function(req, res) {
     let {username, trick_id, stance} = req.body;
+    let points = 0;
     try {
-        const user = await Users.findOne({
+        var user = await Users.findOne({
             where: {
                 username
             }
         })
-        const stanceUser = await Stance.findOne({
+        var stanceUser = await Stance.findOne({
             where: {
                 trick_id,
                 stance
             }
         })
-        user.removeStance(stanceUser);
-        res.send({message: "Stance updated", success: true});
     }
     catch(err){
         res.send({message: "Error updating stance", success: false})
     }
+    await user.removeStance(stanceUser);
+
+    try {
+        var allStances = await user.getStances()
+        allStances.forEach(element => {
+            points += element.rating;
+        });
+    }
+    catch(err) {
+        res.send({message: "Error updating user points", success: false})
+    }
+
+    await user.update(
+        {points}
+    )
+
+    res.send({message: "Stance updated", success: true});
 });
 
 module.exports = router;

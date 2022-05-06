@@ -19,7 +19,8 @@ router.post('/', async (req, res) => {
                     {
                     name: truco.name,
                     stance: stances[i],
-                    trick_id: truco.id
+                    trick_id: truco.id,
+                    rating: truco.rating
                     }
                 )
             }

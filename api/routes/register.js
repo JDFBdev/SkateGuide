@@ -22,7 +22,8 @@ router.post('/', async function(req, res) {
             await Users.create({
                 username,
                 mail,
-                password
+                password,
+                points: 0
             })
             res.send({message: `${username} registrado correctamente` , success: true});
         }

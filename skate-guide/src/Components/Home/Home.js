@@ -32,7 +32,57 @@ export default function Home(){
 
         let userStorage = sessionStorage.getItem('user') || null;
         setUser(userStorage);
+
     },[])
+
+    let menu = document.getElementsByClassName(s.ul);
+    let menu_slider_click = document.getElementById('nav_slide_click');
+
+    const handleClick = function(){
+        nav_slider( menu[0], function( el, width, tempMarginLeft ) {  
+            el.onclick = () => {
+                menu_slider_click.style.width =  width + 1.5 + '%';                    
+                menu_slider_click.style.marginLeft = tempMarginLeft + -49.5 + '%';   // toca esto para ver donde inicia 
+            }
+            });
+    }
+
+    function nav_slider( menu, callback ) {
+        let menu_width = menu.offsetWidth;
+        // We only want the <li> </li> tags
+        menu = menu.getElementsByTagName( 'li' );            
+        if ( menu.length > 0 ) {
+            var marginLeft = [];
+            // Loop through nav children i.e li
+            [].forEach.call( menu, ( el, index ) => {
+            // Dynamic width/margin calculation for hr              
+            var width = getPercentage( el.offsetWidth, menu_width );                              
+            var tempMarginLeft = 0;
+            // We don't want to modify first elements positioning
+            if ( index !== 0 )  {
+                tempMarginLeft = getArraySum( marginLeft );
+            }            
+            // Set mouse event  hover/click
+            callback( el, width, tempMarginLeft );      
+            /* We store it in array because the later accumulated value is used for positioning */
+            marginLeft.push( width + 2.6 );  // toca esto para cambiar cuanto espacio se mueve 
+            } );
+        }
+    }
+
+    // Might make this dynamic for px, %, pt, em 
+    function getPercentage( min, max ) {
+    return min / max * 100;
+    }
+
+    // Not using reduce, because IE8 doesn't supprt it
+    function getArraySum( arr ) {
+        let sum = 0;
+        [].forEach.call( arr, ( el, index ) => {
+            sum += el;
+        } );
+        return sum;
+    }
 
     return (
         <div className={s.wrapper}>
@@ -47,7 +97,7 @@ export default function Home(){
                 </div>
             </div>
             <div className={s.app}>
-                <div className={s.navbar} >
+                <div className={s.navbar1} >
                     <h1 className={s.navbarTitle}>The SB Trick Guide</h1>
                     {
                         user ? 
@@ -61,19 +111,20 @@ export default function Home(){
                             <h3 className={s.tricksTitle} >Tricks</h3>
                             <div className={s.line}/>
                         </div>
-                        <div className={s.filters}>
-                            <button className={s.filter}>Difficulty</button>
-                            <button className={s.filter}>Street</button>
-                            <button className={s.filter}>Grind</button>
-                            <button className={s.filter}>Vert</button>
-                            <button className={s.filter}>Freestyle</button>
-                        </div>
+                        <ul className={s.ul}>
+                            <li className={s.li} onClick={handleClick} key='Difficulty'>Difficulty</li>
+                            <li className={s.li} onClick={handleClick} key='Street'>Street</li>
+                            <li className={s.li} onClick={handleClick} key='Grind'>Grind</li>
+                            <li className={s.li} onClick={handleClick} key='Vert'>Vert</li>
+                            <li className={s.li} onClick={handleClick} key='Freestyle'>Freestyle</li>
+                            <hr className={s.hr} id="nav_slide_click"/> 
+                        </ul> 
                         <div className={s.tricksGrid}>
                             {
                                 tricks?.map((t,i) =>{
                                     return (
-                                    <Transition timeout={i*15}>
-                                        <TrickBtn name={t.name} score={t.rating} onClick={()=>{setSelected(t.id); openTrick();}} key={t.name}/>
+                                    <Transition key={t.name} timeout={i*15}>
+                                        <TrickBtn name={t.name} score={t.rating} onClick={()=>{setSelected(t.id); openTrick();}}/>
                                     </Transition>
                                     )
                                 })
@@ -88,7 +139,7 @@ export default function Home(){
                         {
                             leaderboard?.map((u)=>{
                                 return (
-                                    <div className={s.userLeaderboard}>
+                                    <div key={u.name} className={s.userLeaderboard}>
                                         <p className={s.nameLeaderboard}>{u.name}</p>
                                         <p className={s.scoreLeaderboard}>{u.score}</p>
                                     </div>

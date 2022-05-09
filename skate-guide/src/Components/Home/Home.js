@@ -10,6 +10,7 @@ import axios from 'axios';
 import Log from '../Log/Log';
 import Transition from '../Transition/Transition';
 import Profile from '../Profile/Profile';
+import nav_slider from '../Underline.js';
 
 export default function Home(){
     const [selected, setSelected] = useState(0)
@@ -18,7 +19,9 @@ export default function Home(){
     const [ModalLog, openLog] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
     const [ModalProfile, openProfile] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
     const [user, setUser] = useState(false)
-    const [leaderboard, setLeaderboard] = useState([{name:'Rodney', score: 74}, {name:'Tony', score: 58}])
+    const [leaderboard, setLeaderboard] = useState([{name:'', score: 0}])
+    let menu = document.getElementsByClassName(s.ul);
+    let menu_slider_click = document.getElementById('nav_slide_click');
 
     useEffect(()=>{
         async function fetchData() {
@@ -31,57 +34,33 @@ export default function Home(){
         fetchData();
 
         let userStorage = sessionStorage.getItem('user') || null;
-        setUser(userStorage);
-
+        setUser(userStorage); 
     },[])
 
-    let menu = document.getElementsByClassName(s.ul);
-    let menu_slider_click = document.getElementById('nav_slide_click');
+    useEffect(()=>{
+        handleClick();
+    })
 
     const handleClick = function(){
-        nav_slider( menu[0], function( el, width, tempMarginLeft ) {  
+        nav_slider( menu[0], function( el, width, tempMarginLeft ) {
             el.onclick = () => {
                 menu_slider_click.style.width =  width + 1.5 + '%';                    
                 menu_slider_click.style.marginLeft = tempMarginLeft + -49.5 + '%';   // toca esto para ver donde inicia 
+                
             }
-            });
+        });
     }
 
-    function nav_slider( menu, callback ) {
-        let menu_width = menu.offsetWidth;
-        // We only want the <li> </li> tags
-        menu = menu.getElementsByTagName( 'li' );            
-        if ( menu.length > 0 ) {
-            var marginLeft = [];
-            // Loop through nav children i.e li
-            [].forEach.call( menu, ( el, index ) => {
-            // Dynamic width/margin calculation for hr              
-            var width = getPercentage( el.offsetWidth, menu_width );                              
-            var tempMarginLeft = 0;
-            // We don't want to modify first elements positioning
-            if ( index !== 0 )  {
-                tempMarginLeft = getArraySum( marginLeft );
-            }            
-            // Set mouse event  hover/click
-            callback( el, width, tempMarginLeft );      
-            /* We store it in array because the later accumulated value is used for positioning */
-            marginLeft.push( width + 2.6 );  // toca esto para cambiar cuanto espacio se mueve 
-            } );
+    const handleFilter = function(e){
+        switch (e) {
+            case 'Difficulty':
+                let aux = tricks.sort((a,b)=>{ if (a.rating < b.rating) return 1; if (a.rating > b.rating) return -1; return 0});
+                    setTricks(aux)
+                break;
+        
+            default:
+                break;
         }
-    }
-
-    // Might make this dynamic for px, %, pt, em 
-    function getPercentage( min, max ) {
-    return min / max * 100;
-    }
-
-    // Not using reduce, because IE8 doesn't supprt it
-    function getArraySum( arr ) {
-        let sum = 0;
-        [].forEach.call( arr, ( el, index ) => {
-            sum += el;
-        } );
-        return sum;
     }
 
     return (
@@ -112,11 +91,11 @@ export default function Home(){
                             <div className={s.line}/>
                         </div>
                         <ul className={s.ul}>
-                            <li className={s.li} onClick={handleClick} key='Difficulty'>Difficulty</li>
-                            <li className={s.li} onClick={handleClick} key='Street'>Street</li>
-                            <li className={s.li} onClick={handleClick} key='Grind'>Grind</li>
-                            <li className={s.li} onClick={handleClick} key='Vert'>Vert</li>
-                            <li className={s.li} onClick={handleClick} key='Freestyle'>Freestyle</li>
+                            <li className={s.li} onClick={()=>{handleClick(); handleFilter('Difficulty');}} key='Difficulty'>Difficulty</li>
+                            <li className={s.li} onClick={()=>{handleClick(); handleFilter('Street');}} key='Street'>Street</li>
+                            <li className={s.li} onClick={()=>{handleClick(); handleFilter('Grind');}} key='Grind'>Grind</li>
+                            <li className={s.li} onClick={()=>{handleClick(); handleFilter('Vert');}} key='Vert'>Vert</li>
+                            <li className={s.li} onClick={()=>{handleClick(); handleFilter('Freestyle');}} key='Freestyle'>Freestyle</li>
                             <hr className={s.hr} id="nav_slide_click"/> 
                         </ul> 
                         <div className={s.tricksGrid}>

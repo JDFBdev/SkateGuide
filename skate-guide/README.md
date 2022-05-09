@@ -1,32 +1,13 @@
 ## The SB Trick Guide
 
-## Front
-Landing 
- - Mostrar trucos
- - Mostrar trucos aprendidos
- - Mostrar Leaderboard
- - Filtros dificultad, aprendidos, no aprendidos, etc.
- - Buscador
- - Mapa con skateparks cercanos
+## To Do
+Filtros
+Enviar email al hacer cuenta
+I forgor password
+Cookies y contaseña hasheada
+Mapa
+Reponsive Design
 
-Login
- - Mail
- - Password
- - Subir foto o elegir avatar
-
-## Back
-Crear Tabla Stances en pgadmin
-Crear Tabla Users en pgadmin
-Crear Tabla intermedia Users-Stances
-
-Endpoint post User
- - Mail
- - Password
- - Subir foto o elegir avatar
-
-Endpoint get login
- - Mail
- - Password
 
 [
 {

@@ -14,11 +14,12 @@ import nav_slider from '../Underline.js';
 
 export default function Home(){
     const [selected, setSelected] = useState(0)
-    const [tricks, setTricks] = useState([]);
+    const [tricks, setTricks] = useState({all:[], render: []});
     const [ModalTrick, openTrick] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
     const [ModalLog, openLog] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
     const [ModalProfile, openProfile] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
-    const [user, setUser] = useState(false)
+    const [user, setUser] = useState(false);
+    const [diff, setDiff] = useState(false);
     const [leaderboard, setLeaderboard] = useState([{name:'', score: 0}])
     let menu = document.getElementsByClassName(s.ul);
     let menu_slider_click = document.getElementById('nav_slide_click');
@@ -27,7 +28,7 @@ export default function Home(){
         async function fetchData() {
             await Promise.all([axios.get(`http://localhost:3001/allTricks`), axios.get(`http://localhost:3001/leaderboard`)])
             .then(values=>{
-                setTricks(values[0].data);
+                setTricks(prev=>({all: values[0].data, render: values[0].data}));
                 setLeaderboard(values[1].data)
             })
         }
@@ -52,12 +53,49 @@ export default function Home(){
     }
 
     const handleFilter = function(e){
+        let aux = [];
         switch (e) {
             case 'Difficulty':
-                let aux = tricks.sort((a,b)=>{ if (a.rating < b.rating) return 1; if (a.rating > b.rating) return -1; return 0});
-                    setTricks(aux)
+                    aux = [...tricks.all];
+                    diff ? 
+                    aux.sort((a,b)=>{ if (a.rating < b.rating) return -1; if (a.rating > b.rating) return 1; return 0}) : 
+                    aux.sort((a,b)=>{ if (a.rating < b.rating) return 1; if (a.rating > b.rating) return -1; return 0});
+                    setDiff(!diff)
+                    setTricks(prev=>({...prev, render: aux}));
                 break;
-        
+            
+            case 'Street':
+                    aux = [...tricks.all];
+                    aux.filter((t)=>{
+                    return t.type === 'Street'
+                    })
+                    setTricks(prev=>({...prev, render: aux}));
+                break;
+
+            case 'Grind':
+                    aux = [...tricks.all];
+                    aux = aux.filter((t)=>{
+                        return t.type === 'Grind'
+                    })
+                    setTricks(prev=>({...prev, render: aux}));
+                break;
+
+            case 'Vert':
+                aux = [...tricks.all];
+                aux = aux.filter((t)=>{
+                    return t.type === 'Vert'
+                })
+                setTricks(prev=>({...prev, render: aux}));
+            break;
+
+            case 'Freestyle':
+                aux = [...tricks.all];
+                aux = aux.filter((t)=>{
+                    return t.type === 'Freestyle'
+                })
+                setTricks(prev=>({...prev, render: aux}));
+            break;
+
             default:
                 break;
         }
@@ -100,7 +138,7 @@ export default function Home(){
                         </ul> 
                         <div className={s.tricksGrid}>
                             {
-                                tricks?.map((t,i) =>{
+                                tricks.render?.map((t,i) =>{
                                     return (
                                     <Transition key={t.name} timeout={i*15}>
                                         <TrickBtn name={t.name} score={t.rating} onClick={()=>{setSelected(t.id); openTrick();}}/>

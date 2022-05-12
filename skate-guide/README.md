@@ -1,12 +1,12 @@
 ## The SB Trick Guide
 
 ## To Do
-Filtros
-Enviar email al hacer cuenta
-I forgor password
-Cookies y contaseña hasheada
-Mapa
-Reponsive Design
+[✔️] Filtros
+[] Enviar email al hacer cuenta
+[] I forgor password
+[] Cookies y contaseña hasheada
+[] Mapa
+[] Reponsive Design
 
 
 [

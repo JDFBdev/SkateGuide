@@ -29,35 +29,37 @@ export default function TrickPage({id, user}){
     },[id, user])
 
     const handleStance = async function(e){
-        if(!stances[e.target.id]){
-            let promise = await axios.post(`http://localhost:3001/addStance`,{
-                username: user,
-                trick_id: id,
-                stance: e.target.id
-            })
-            let response = promise.data;
+        if(user){
+            if(!stances[e.target.id]){
+                let promise = await axios.post(`http://localhost:3001/addStance`,{
+                    username: user,
+                    trick_id: id,
+                    stance: e.target.id
+                })
+                let response = promise.data;
 
-            if (!response.success){
-                toast.error(response.message);
-            }
-            else{
-                toast.success(response.message);
-                setStances(prev=>({...prev, [e.target.id]: true}))
-            }
-        } else {
-            let promise = await axios.post(`http://localhost:3001/deleteStance`,{
-                username: user,
-                trick_id: id,
-                stance: e.target.id
-            })
-            let response = promise.data;
+                if (!response.success){
+                    toast.error(response.message);
+                }
+                else{
+                    toast.success(response.message);
+                    setStances(prev=>({...prev, [e.target.id]: true}))
+                }
+            } else {
+                let promise = await axios.post(`http://localhost:3001/deleteStance`,{
+                    username: user,
+                    trick_id: id,
+                    stance: e.target.id
+                })
+                let response = promise.data;
 
-            if (!response.success){
-                toast.error(response.message);
-            }
-            else{
-                toast.success(response.message);
-                setStances(prev=>({...prev, [e.target.id]: false}))
+                if (!response.success){
+                    toast.error(response.message);
+                }
+                else{
+                    toast.success(response.message);
+                    setStances(prev=>({...prev, [e.target.id]: false}))
+                }
             }
         }
     }

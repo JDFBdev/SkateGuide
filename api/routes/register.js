@@ -1,11 +1,24 @@
 var express = require('express');
 var router = express.Router();
-const db = require('../db');
 const {Users} = require('../models/users')
+const nodemailer = require('nodemailer');
 
 router.post('/', async function(req, res) {
     let {username, mail, password} = req.body;
     let crear = true;
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+        user: 'sbtrickguide@gmail.com',
+        pass: 'tuki1234!'
+        }
+        });
+    const mailOptions = {
+        from: 'The SB Trick Guide',
+        to: mail,
+        subject: 'Your New Account',
+        text: `This are your new credentials for login into The SB Trick Guide:\nusername: ${username}\npassword: ${password}`
+        };
     try {
         await Promise.all([Users.findOne({ where : {username}}), Users.findOne({ where : {mail}})])
         .then(values =>{
@@ -25,6 +38,9 @@ router.post('/', async function(req, res) {
                 password,
                 points: 0
             })
+            transporter.sendMail(mailOptions, e => {
+                console.log(e);
+            });
             res.send({message: `${username} registrado correctamente` , success: true});
         }
     }

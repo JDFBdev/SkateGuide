@@ -14,6 +14,8 @@ const bulkCreateStances = require('./bulkCreateStances');
 const addStance = require('./addStance');
 const deleteStance = require('./deleteStance');
 const leaderboard = require('./leaderboard');
+const sendEmail = require('./sendEmail');
+const changePassword = require('./changePassword');
 
 router.use('/allTricks', allTricks);
 router.use('/createTrick', createTrick);
@@ -28,6 +30,8 @@ router.use('/bulkCreateStances', bulkCreateStances);
 router.use('/addStance', addStance);
 router.use('/deleteStance', deleteStance);
 router.use('/leaderboard', leaderboard);
+router.use('/sendEmail', sendEmail);
+router.use('/changePassword', changePassword);
 
 /* GET home page. */
 router.get('*', (req, res) => {

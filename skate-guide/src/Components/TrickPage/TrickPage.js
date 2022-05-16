@@ -61,6 +61,8 @@ export default function TrickPage({id, user}){
                     setStances(prev=>({...prev, [e.target.id]: false}))
                 }
             }
+        } else{
+            toast.success('Log in to keep track of your progress!');
         }
     }
 

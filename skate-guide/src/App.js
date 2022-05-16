@@ -1,6 +1,6 @@
 import './App.css';
 import Home from './Components/Home/Home';
-import TrickPage from './Components/TrickPage/TrickPage';
+import ChangePass from './Components/ChangePass/ChangePass';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { Toaster } from "react-hot-toast";
 
@@ -11,7 +11,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home/>}/>
-          <Route path='/trick' element={<TrickPage/>}/>
+          <Route path='/changePassword/:param' element={<ChangePass/>}/>
         </Routes>
       </BrowserRouter>
       

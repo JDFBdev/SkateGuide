@@ -41,6 +41,7 @@ export  function validate(input){
 
 export default function Log(){
     const [log, setLog] = useState(true);
+    const [change, setChange] = useState(false);
     const [input, setInput] = useState({user:'', pass: '', username:'', email: '', pass1: '', pass2: ''});
     const [errors, setErrors] = React.useState({});
 
@@ -81,7 +82,7 @@ export default function Log(){
                 toast.error(response.message)
             }
             else{
-                toast.success('Registro exitoso!')
+                toast.success('Successful Register')
                 setLog(true);
                 setErrors({})
             }
@@ -89,10 +90,32 @@ export default function Log(){
 
     }
 
+    const handleChange =  async function(e){
+        e.preventDefault();
+        let errors = validate(input);
+        setErrors(errors);
+        if (!errors.email){
+            let promise = await axios.post(`http://localhost:3001/sendEmail`,{
+                mail: input.email,
+            })
+            let response = promise.data;
+
+            if (!response.success){
+                toast.error(response.message);
+            }
+            else if (response.success){
+                toast.success('An Email will be sent to your account with the following steps')
+                setLog(true);
+                setChange(false);
+                setErrors({});
+            }
+        }
+    }
+
     return(
         <>
             {
-                log &&
+                (log && !change) &&
                 <Transition>
                     <div className={log ?  s.container : s.container2}>
                         <div className={s.header}>
@@ -102,7 +125,7 @@ export default function Log(){
                         <input className={s.input} placeholder="User or Email..." onChange={handleInput} id='user' style={{border: errors.user ? 'solid 1px rgb(127, 44, 44)' : 'solid 1px rgb(0, 0, 0, 0)'}} data-tip data-for='user'/>
                         <div className={s.passwordDiv}>
                             <input className={s.input2} type="password" placeholder="Password..." onChange={handleInput} id='pass' style={{border: errors.pass ? 'solid 1px rgb(127, 44, 44)' : 'solid 1px rgb(0, 0, 0, 0)'}} data-tip data-for='pass'/>
-                            <p className={s.forgot}>Forgot Your Password?</p>
+                            <p className={s.forgot} onClick={()=> setChange(true)}>Forgot Your Password?</p>
                         </div>
                         <div className={s.btnDiv}>
                             <button className={s.btnSubmit} onClick={handleSubmit} >Log In</button>
@@ -112,7 +135,7 @@ export default function Log(){
                 </Transition>
             }
             {
-                !log &&
+                (!log && !change) &&
                 <Transition>
                     <div className={log ?  s.container : s.container2}>
                         <div className={s.header}>
@@ -126,6 +149,24 @@ export default function Log(){
                         <div className={s.btnDiv}>
                             <button className={s.btnSubmit} onClick={handleSubmit}>Sign Up</button>
                             <p className={s.signUp} onClick={()=>{setLog(true); setErrors({}); setInput(prev=>({...prev, username: '', email: '', pass1: '', pass2: ''}))}}>Or Log In</p>
+                        </div>
+                    </div>
+                </Transition>
+            }
+            {
+                change && 
+                <Transition>
+                    <div className={s.container3}>
+                        <div className={s.header}>
+                            <h1 className={s.title} style={{fontSize:'2.5rem'}}>Forgot Your password?</h1>
+                            <div className={s.line}/>
+                        </div>
+                        <div className={s.passwordDiv}>
+                            <input className={s.input2} placeholder="Email..." onChange={handleInput} id='email' style={{border: errors.email ? 'solid 1px rgb(127, 44, 44)' : 'solid 1px rgb(0, 0, 0, 0)'}} data-tip data-for='email'/>
+                            <p className={s.signUp} style={{cursor: 'default'}}>An Email will be sent to your account with the following steps</p>
+                        </div>
+                        <div className={s.btnDiv}>
+                            <button className={s.btnSubmit} onClick={handleChange}>Change Password</button>
                         </div>
                     </div>
                 </Transition>

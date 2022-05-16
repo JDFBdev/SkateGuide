@@ -2,8 +2,8 @@
 
 ## To Do
 [✔️] Filtros
-[] Enviar email al hacer cuenta
-[] I forgor password
+[✔️] Enviar email al hacer cuenta
+[✔️] I forgor password
 [] Cookies y contaseña hasheada
 [] Mapa
 [] Reponsive Design

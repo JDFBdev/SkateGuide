@@ -5,8 +5,8 @@
 [✔️] Enviar email al hacer cuenta
 [✔️] I forgor password
 [] Cookies y contaseña hasheada
-[] Mapa
 [] Reponsive Design
+[] Cargar Trucos
 
 
 [

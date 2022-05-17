@@ -23,10 +23,12 @@ export default function TrickPage({id, user}){
                 setStances(response.stances);
             }
             setTrick(response.trick);
-            setSkates([...Array(response.rating).keys()])
+            setSkates([...Array(response.trick.rating).keys()])
         }
         fetchData();
     },[id, user])
+
+    console.log(skates)
 
     const handleStance = async function(e){
         if(user){

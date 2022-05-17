@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const bodyParser = require("body-parser");
+const session = require("express-session");
 
 var routes = require('./routes/index');
 
@@ -24,6 +26,18 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  session({
+    key: "userId",
+    secret: "tuki",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 60 * 60 * 24
+    }
+  })
+)
 
 app.use('/', routes);
 

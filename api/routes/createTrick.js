@@ -5,7 +5,6 @@ const Tricks = require('../models/tricks')
 
 router.post('/', async (req, res) => {
     let {id, name, rating, description, video, type} = req.body;
-    id = 2;
     try {
         await Tricks.create({
             id,

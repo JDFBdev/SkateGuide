@@ -1,25 +1,38 @@
 var express = require('express');
 var router = express.Router();
-const db = require('../db');
 const {Users} = require('../models/users')
+const bcrypt = require('bcrypt');
+
+router.get('/', async function(req, res) {
+    if (req.session.user) {
+        res.send({ loggedIn: true, user: req.session.user});
+    } else {
+        res.send({ loggedIn: false});
+    }
+});
 
 router.post('/', async function(req, res) {
     let {username, password} = req.body;
+
     try {
-        await Promise.all([Users.findOne({ where : {username}}), Users.findOne({ where : {password}})])
-        .then(values =>{
-            if (values[0] === null) {
-                res.send({message: "Usuario Inexistente", success: false});
-            }
-            if (values[1] === null) {
-                res.send({message: "Contraseña incorrecta", success: false});
-            }
-        })
-        res.send({message: `${username} logeado` , success: true});
+        var user = await Users.findOne({ where : {username}});
     }
     catch(err){
         console.log(err);
     }
+    if (user !== null){
+        bcrypt.compare(password, user.password, (error, response) => {
+            if (response) {
+                req.session.user = user;
+                console.log(req.session.user);
+                res.send({message: `${username} logeado` , success: true});
+            } else {
+                res.send({message: "Contraseña incorrecta", success: false});
+            }
+        });
+    } else {
+        res.send({message: "Usuario Inexistente", success: false});
+    } 
 });
 
 module.exports = router;

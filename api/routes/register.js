@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const {Users} = require('../models/users')
 const nodemailer = require('nodemailer');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 router.post('/', async function(req, res) {
     let {username, mail, password} = req.body;
@@ -32,11 +34,16 @@ router.post('/', async function(req, res) {
             }
         })
         if (crear == true) {
-            await Users.create({
-                username,
-                mail,
-                password,
-                points: 0
+            bcrypt.hash(password, saltRounds, (err, hash) => {
+                if (err) {
+                    console.log(err);
+                }
+                Users.create({
+                    username,
+                    mail,
+                    password : hash,
+                    points: 0
+                })
             })
             transporter.sendMail(mailOptions, e => {
                 console.log(e);

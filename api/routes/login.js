@@ -24,7 +24,6 @@ router.post('/', async function(req, res) {
         bcrypt.compare(password, user.password, (error, response) => {
             if (response) {
                 req.session.user = user;
-                console.log(req.session.user);
                 res.send({message: `${username} logeado` , success: true});
             } else {
                 res.send({message: "Contraseña incorrecta", success: false});

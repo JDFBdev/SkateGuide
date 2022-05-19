@@ -12,13 +12,12 @@ import Transition from '../Transition/Transition';
 import Profile from '../Profile/Profile';
 import nav_slider from '../Underline.js';
 
-export default function Home(){
+export default function Home({user, setUser}){
     const [selected, setSelected] = useState(0)
     const [tricks, setTricks] = useState({all:[], render: []});
     const [ModalTrick, openTrick] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
     const [ModalLog, openLog] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
     const [ModalProfile, openProfile] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
-    const [user, setUser] = useState(false);
     const [diff, setDiff] = useState(false);
     const [leaderboard, setLeaderboard] = useState([{name:'', score: 0}])
     let menu = document.getElementsByClassName(s.ul);
@@ -33,9 +32,6 @@ export default function Home(){
             })
         }
         fetchData();
-
-        let userStorage = sessionStorage.getItem('user') || null;
-        setUser(userStorage); 
     },[])
 
     useEffect(()=>{
@@ -174,7 +170,7 @@ export default function Home(){
 
             <ModalLog>
                 <Transition>
-                    <Log/>
+                    <Log user={user} setUser={setUser}/>
                 </Transition>
             </ModalLog>
 

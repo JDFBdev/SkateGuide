@@ -4,8 +4,7 @@ import s from './Profile.module.css';
 export default function Profile({user}){
 
     const handleLogOut = function(){
-        sessionStorage.removeItem('user');
-        window.location.reload(false);
+        window.location.href = window.location.href;
     }
 
     return(

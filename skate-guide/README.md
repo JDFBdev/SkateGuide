@@ -4,7 +4,7 @@
 [✔️] Filtros
 [✔️] Enviar email al hacer cuenta
 [✔️] I forgor password
-[] Cookies y contaseña hasheada
+[✔️] Cookies y contaseña hasheada
 [] Reponsive Design
 [] Cargar Trucos
 

@@ -39,7 +39,7 @@ export  function validate(input){
     return errors;
 }
 
-export default function Log({user, setUser}){
+export default function Log(){
     const [log, setLog] = useState(true);
     const [change, setChange] = useState(false);
     const [input, setInput] = useState({user:'', pass: '', username:'', email: '', pass1: '', pass2: ''});
@@ -64,7 +64,8 @@ export default function Log({user, setUser}){
                 toast.error(response.message)
             }
             else if(response.success){
-                toast.success('Logged In!')
+                toast.success('Logged In!');
+                window.location.reload()
             }
         }
 
@@ -80,7 +81,7 @@ export default function Log({user, setUser}){
                 toast.error(response.message)
             }
             else{
-                toast.success('Successful Register')
+                toast.success('Successful Register');
                 setLog(true);
                 setErrors({});
             }

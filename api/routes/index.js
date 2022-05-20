@@ -16,6 +16,7 @@ const deleteStance = require('./deleteStance');
 const leaderboard = require('./leaderboard');
 const sendEmail = require('./sendEmail');
 const changePassword = require('./changePassword');
+const logout = require('./logout');
 
 router.use('/allTricks', allTricks);
 router.use('/createTrick', createTrick);
@@ -32,6 +33,7 @@ router.use('/deleteStance', deleteStance);
 router.use('/leaderboard', leaderboard);
 router.use('/sendEmail', sendEmail);
 router.use('/changePassword', changePassword);
+router.use('/logout', logout);
 
 /* GET home page. */
 router.get('*', (req, res) => {

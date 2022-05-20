@@ -12,7 +12,7 @@ import Transition from '../Transition/Transition';
 import Profile from '../Profile/Profile';
 import nav_slider from '../Underline.js';
 
-export default function Home({user, setUser}){
+export default function Home({user, setUser, data, setData}){
     const [selected, setSelected] = useState(0)
     const [tricks, setTricks] = useState({all:[], render: []});
     const [ModalTrick, openTrick] = useModal('root', { preventScroll: true, closeOnOverlayClick: true});
@@ -170,13 +170,13 @@ export default function Home({user, setUser}){
 
             <ModalLog>
                 <Transition>
-                    <Log user={user} setUser={setUser}/>
+                    <Log />
                 </Transition>
             </ModalLog>
 
             <ModalProfile>
                 <Transition>
-                    <Profile user={user}/>
+                    <Profile user={user} setUser={setUser} data={data} setData={setData}/>
                 </Transition>
             </ModalProfile>
         </div>

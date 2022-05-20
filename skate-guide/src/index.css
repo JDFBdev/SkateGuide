@@ -17,6 +17,11 @@ body {
   src: url(./img/BebasNeue-Regular.ttf);
 }
 
+@font-face {
+  font-family: bebas pro;
+  src: url(./img/BebasNeueProBold.otf);
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

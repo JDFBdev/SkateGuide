@@ -16,6 +16,7 @@ router.post('/', async function(req, res) {
 
     try {
         var user = await Users.findOne({ where : {username}});
+        var mail = await Users.findOne({ where : {mail: username}});
     }
     catch(err){
         console.log(err);
@@ -25,6 +26,15 @@ router.post('/', async function(req, res) {
             if (response) {
                 req.session.user = user;
                 res.send({message: `${username} logeado` , success: true, user: user.username});
+            } else {
+                res.send({message: "Contraseña incorrecta", success: false});
+            }
+        });
+    } else if (mail !== null){
+        bcrypt.compare(password, mail.password, (error, response) => {
+            if (response) {
+                req.session.user = mail;
+                res.send({message: `${username} logeado` , success: true, user: mail.username});
             } else {
                 res.send({message: "Contraseña incorrecta", success: false});
             }

@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
 const Tricks = require('../models/tricks')
 
+// Add all the tricks to the Tricks databse at once
 router.post('/', async (req, res) => {
     try {
         await Tricks.bulkCreate([
@@ -215,10 +215,10 @@ router.post('/', async (req, res) => {
             type: 'Street'
         }
         ])
-        .then(() =>res.send(`Trucos registrados correctamente`))
+        .then(() =>res.send({message: `Tricks registered`, success: true}))
     }
     catch(err){
-        res.sendStatus(500).send(err);
+        res.send({message: "Error adding tricks", err, success: false})
     }
 })
 

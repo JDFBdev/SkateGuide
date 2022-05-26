@@ -4,23 +4,24 @@ const {Users} = require('../models/users')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+// changes the password of an user
 router.post('/', async (req, res) => {
     let {user, pass} = req.body;
     try {
         bcrypt.hash(pass, saltRounds, (err, hash) => {
             if (err) {
-                console.log(err);
+                res.send({message: "Error hashing password", err, success: false})
             }
             Users.update(
                 { password : hash },
                 { where: { username: user } }
             )
         })
-        res.send({message: `contrasenia modificada correctamente` , success: true});
     }
     catch(err){
-        res.send({message: `contrasenia no se pudo modificar` , success: false});
+        return res.send({message: `Error changing password` , err, success: false});
     }
+    res.send({message: `Password changed` , success: true});
 })
 
 module.exports = router;

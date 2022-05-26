@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
 const {Users} = require('../models/users')
 
+// delete 1 user from the Users database
 router.post('/', async (req, res) => {
     let {username} = req.body;
     try {
         await Users.destroy({ where: { username } });
-        res.send(`El Usuario se borro correctamente`);
     }
     catch(err){
-        res.sendStatus(500).send(err);
+        return res.send({message: "Error deleting user", err, success: false})
     }
+    res.send({message: `User deleted`, success: true});
 })
 
 module.exports = router;

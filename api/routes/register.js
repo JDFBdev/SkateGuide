@@ -5,6 +5,7 @@ const nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+// register a new user in the Users database
 router.post('/', async function(req, res) {
     let {username, mail, password} = req.body;
     let crear = true;
@@ -25,18 +26,18 @@ router.post('/', async function(req, res) {
         await Promise.all([Users.findOne({ where : {username}}), Users.findOne({ where : {mail}})])
         .then(values =>{
             if (values[0] !== null) {
-                res.send({message: "Nombre de Usuario no disponible", success: false});
+                res.send({message: "Username not available", success: false});
                 crear = false;
             }
             if (values[1] !== null) {
-                res.send({message: "Mail ya registrado", success: false});
+                res.send({message: "Mail not available", success: false});
                 crear = false;
             }
         })
         if (crear == true) {
             bcrypt.hash(password, saltRounds, (err, hash) => {
                 if (err) {
-                    console.log(err);
+                    return res.send({message: `Error hashing password` , err, success: false});
                 }
                 Users.create({
                     username,
@@ -48,12 +49,12 @@ router.post('/', async function(req, res) {
             transporter.sendMail(mailOptions, e => {
                 console.log(e);
             });
-            res.send({message: `${username} registrado correctamente` , success: true});
+            res.send({message: `${username} registered correctly` , success: true});
         }
     }
     catch(err){
-        console.log(err);
-    } 
+        res.send({message: `Error finding username/mail` , err, success: false});
+    }
 });
 
 module.exports = router;

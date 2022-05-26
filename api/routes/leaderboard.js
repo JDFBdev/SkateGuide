@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const db = require('../db');
 const {Users} = require('../models/users');
 
+// Get 10 users with their point, in descending order
 router.get('/', async function(req, res){
     try{
         var users = await Users.findAll({
@@ -14,7 +14,7 @@ router.get('/', async function(req, res){
         )
     }
     catch(err){
-        res.send({message: "Error retrieving leaderboard", success: false})
+        return res.send({message: "Error retrieving leaderboard", success: false})
     }
     let response = users.map( a => {
         return {

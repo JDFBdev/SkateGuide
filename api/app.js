@@ -27,6 +27,8 @@ app.use((req, res, next) => {
   next();
 });
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// cookie setup
 app.use(
   session({
     key: "userId",

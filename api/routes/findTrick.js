@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
 const Tricks = require('../models/tricks')
 const {Users} = require('../models/users')
 
+// Get 1 trick from Tricks database. If user is logged in, also get wich stances user have.
 router.get('/:id/:username', async (req, res) => {
     let {id, username} = req.params;
     let response = {}
@@ -16,7 +16,7 @@ router.get('/:id/:username', async (req, res) => {
         }
     }
     catch(err){
-        console.log(err)
+        return res.send({messagge: `Error finding trick`, success: false});
     }
 
     response.trick = trick;
@@ -37,8 +37,8 @@ router.get('/:id/:username', async (req, res) => {
         if (!response.stances.hasOwnProperty('Switch')) {
             response.stances.Switch = false;
         }
+        res.send(response);
     }
-    res.send(response);
 })
 
 module.exports = router;

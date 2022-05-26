@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
 const Tricks = require('../models/tricks')
 
+// Edit 1 trick from the Tricks database
 router.post('/', async (req, res) => {
     let {id, propiedad, valor} = req.body;
     try {
@@ -10,11 +10,11 @@ router.post('/', async (req, res) => {
                 { [propiedad] : valor},
                 { where: { id } }
             )
-        res.send(`El truco se edito correctamente`);
     }
     catch(err){
-        res.sendStatus(500).send(err);
+        return res.send({message: `Error updating trick`, success: false});
     }
+    res.send({message: `Trick updated`, success: true});
 })
 
 module.exports = router;

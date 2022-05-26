@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
 const Tricks = require('../models/tricks')
 
+// Add 1 trick to the Tricks databse
 router.post('/', async (req, res) => {
     let {id, name, rating, description, video, type} = req.body;
     try {
@@ -14,11 +14,11 @@ router.post('/', async (req, res) => {
             video,
             type
         })
-        res.send(`${name} registrado correctamente`);
     }
     catch(err){
-        res.sendStatus(500).send(err);
+        return res.send({message: "Error adding trick", err, success: false})
     }
+    res.send({message: `${name} added`, success: true});
 })
 
 module.exports = router;

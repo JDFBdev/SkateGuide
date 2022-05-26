@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const db = require('../db');
 const {Users, Stance} = require('../models/users');
 
+// Add 1 Stance to the User
 router.post('/', async function(req, res) {
     let {username, trick_id, stance} = req.body;
     let points = 0;
@@ -21,24 +21,22 @@ router.post('/', async function(req, res) {
         })
     }
     catch(err){
-        res.send({message: "Error updating stance", success: false})
+        return res.send({message: "Error updating stance", err, success: false})
     }
 
-    await user.addStance(stanceUser);
-
     try {
+        await user.addStance(stanceUser);
         var allStances = await user.getStances()
         allStances.forEach(element => {
             points += element.rating;
         });
+        await user.update(
+            {points}
+        )
     }
     catch(err) {
-        res.send({message: "Error updating user points", success: false})
+        return res.send({message: "Error updating user points", err, success: false})
     }
-
-    await user.update(
-        {points}
-    )
 
     res.send({message: "Stance updated", success: true});
 });

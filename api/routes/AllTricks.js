@@ -1,15 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
 const Tricks = require('../models/tricks')
 
+// Get all tricks in the Tricks database
 router.get('/', async (req, res) => {
-    let tricks = await Tricks.findAll();
-    if (tricks) {
-        res.send(tricks);
-    } else {
-        res.send("Error");
+    try {
+        var tricks = await Tricks.findAll();
     }
+    catch(err) {
+        return res.send({message: "Error finding tricks", err, success: false})
+    }
+    res.send(tricks);
 })
 
 module.exports = router;

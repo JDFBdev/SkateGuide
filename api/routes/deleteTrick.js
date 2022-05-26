@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
 const Tricks = require('../models/tricks')
 
+// Delete 1 trick from the Tricks databse
 router.post('/', async (req, res) => {
     let {id} = req.body;
     try {
         await Tricks.destroy({ where: { id } });
-        res.send(`El truco se borro correctamente`);
     }
     catch(err){
-        res.sendStatus(500).send(err);
+        return res.send({message: "Error deleting trick", err, success: false})
     }
+    res.send({message: `Trick deleted`, success: true});
 })
 
 module.exports = router;

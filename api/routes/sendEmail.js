@@ -3,13 +3,14 @@ const router = express.Router();
 const {Users} = require('../models/users')
 const nodemailer = require('nodemailer');
 
+// Send an email to a user for changin his password
 router.post('/', async (req, res) => {
     let {mail} = req.body;
     try {
         var user = await Users.findOne({where: {mail}});
     }
     catch(err){
-        console.log(err);
+        return res.send({message: `Error finding User` , err, success: false});
     }
 
     let base64user = Buffer.from(`${user.username}`).toString('base64')
@@ -34,8 +35,8 @@ router.post('/', async (req, res) => {
             </div>`
         };
 
-    transporter.sendMail(mailOptions, e => {
-        console.log(e);
+    transporter.sendMail(mailOptions, err => {
+        res.send({message: `Error sending mail` , err, success: false});
     });
 })
 

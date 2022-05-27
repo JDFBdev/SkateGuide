@@ -43,7 +43,7 @@ export default function ChangePass(){
         setErrors(errors);
         
         if (!errors.pass1 && !errors.pass2){
-            let promise = await axios.post(`http://localhost:3001/changePassword`,{
+            let promise = await axios.post(`https://skate-guide-backend.herokuapp.com/changePassword`,{
                 user: user,
                 pass: input.pass1
             })

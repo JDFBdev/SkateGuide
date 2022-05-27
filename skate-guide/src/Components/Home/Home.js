@@ -25,7 +25,7 @@ export default function Home({user, setUser, data, setData}){
 
     useEffect(()=>{
         async function fetchData() {
-            await Promise.all([axios.get(`http://localhost:3001/allTricks`), axios.get(`http://localhost:3001/leaderboard`)])
+            await Promise.all([axios.get(`https://skate-guide-backend.herokuapp.com/allTricks`), axios.get(`https://skate-guide-backend.herokuapp.com/leaderboard`)])
             .then(values=>{
                 setTricks(prev=>({all: values[0].data, render: values[0].data}));
                 setLeaderboard(values[1].data)

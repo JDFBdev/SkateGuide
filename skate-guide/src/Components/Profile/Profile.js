@@ -5,7 +5,7 @@ import axios from "axios";
 export default function Profile({user, setUser, data, setData}){
 
     const handleLogOut = async function(){
-        await axios.post('http://localhost:3001/logout').then((response)=>{
+        await axios.post('https://skate-guide-backend.herokuapp.com/logout').then((response)=>{
             setUser('')
             setData({});
             window.location.reload();

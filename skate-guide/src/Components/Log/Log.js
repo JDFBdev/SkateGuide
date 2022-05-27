@@ -55,7 +55,7 @@ export default function Log(){
         setErrors(errors);
 
         if (log && !errors.user && !errors.pass){
-            let promise = await axios.post(`http://localhost:3001/login`,{
+            let promise = await axios.post(`https://skate-guide-backend.herokuapp.com/login`,{
                 username: input.user,
                 password: input.pass
             })
@@ -70,7 +70,7 @@ export default function Log(){
         }
 
         else if (!log && !errors.username && !errors.email && !errors.pass1 && !errors.pass1) {
-            let promise = await axios.post(`http://localhost:3001/register`,{
+            let promise = await axios.post(`https://skate-guide-backend.herokuapp.com/register`,{
                 username: input.username,
                 mail: input.email,
                 password: input.pass1
@@ -94,7 +94,7 @@ export default function Log(){
         let errors = validate(input);
         setErrors(errors);
         if (!errors.email){
-            let promise = await axios.post(`http://localhost:3001/sendEmail`,{
+            let promise = await axios.post(`https://skate-guide-backend.herokuapp.com/sendEmail`,{
                 mail: input.email,
             })
             let response = promise.data;

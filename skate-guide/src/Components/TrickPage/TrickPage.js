@@ -14,9 +14,9 @@ export default function TrickPage({id, user}){
         async function fetchData() {
             let promise = {};
             if (!user){
-                promise = await axios.get(`http://localhost:3001/findTrick/${id}/-1`)
+                promise = await axios.get(`https://skate-guide-backend.herokuapp.com/findTrick/${id}/-1`)
             } else {
-                promise = await axios.get(`http://localhost:3001/findTrick/${id}/${user}`)
+                promise = await axios.get(`https://skate-guide-backend.herokuapp.com/findTrick/${id}/${user}`)
             }
             let response = promise.data;
             if(response.hasOwnProperty('stances')){
@@ -28,12 +28,10 @@ export default function TrickPage({id, user}){
         fetchData();
     },[id, user])
 
-    console.log(skates)
-
     const handleStance = async function(e){
         if(user){
             if(!stances[e.target.id]){
-                let promise = await axios.post(`http://localhost:3001/addStance`,{
+                let promise = await axios.post(`https://skate-guide-backend.herokuapp.com/addStance`,{
                     username: user,
                     trick_id: id,
                     stance: e.target.id
@@ -48,7 +46,7 @@ export default function TrickPage({id, user}){
                     setStances(prev=>({...prev, [e.target.id]: true}))
                 }
             } else {
-                let promise = await axios.post(`http://localhost:3001/deleteStance`,{
+                let promise = await axios.post(`https://skate-guide-backend.herokuapp.com/deleteStance`,{
                     username: user,
                     trick_id: id,
                     stance: e.target.id

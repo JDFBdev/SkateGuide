@@ -15,7 +15,7 @@ function App() {
 
   useEffect( ()=>{
     const fetchData = async function(){
-      await axios.get('http://localhost:3001/login').then((response)=>{
+      await axios.get('https://skate-guide-backend.herokuapp.com/login').then((response)=>{
         if(response.data.loggedIn){
           setUser(response.data.user.username);
           setData(response.data.user);

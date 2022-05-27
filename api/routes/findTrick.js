@@ -37,8 +37,8 @@ router.get('/:id/:username', async (req, res) => {
         if (!response.stances.hasOwnProperty('Switch')) {
             response.stances.Switch = false;
         }
-        res.send(response);
     }
+    res.send(response);
 })
 
 module.exports = router;

@@ -47,7 +47,9 @@ router.post('/', async function(req, res) {
                 })
             })
             transporter.sendMail(mailOptions, e => {
-                console.log(e);
+                if (e) {
+                    return res.send({message: `Error sending mail` , e, success: false});
+                }
             });
             res.send({message: `${username} registered correctly` , success: true});
         }

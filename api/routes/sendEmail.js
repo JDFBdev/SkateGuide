@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
     }
 
     let base64user = Buffer.from(`${user.username}`).toString('base64')
-    const url = `http://localhost:3000/changePassword/${base64user}`
+    const url = `https://skate-guide.vercel.app/changePassword/${base64user}`
 
     const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -36,7 +36,10 @@ router.post('/', async (req, res) => {
         };
 
     transporter.sendMail(mailOptions, err => {
-        res.send({message: `Error sending mail` , err, success: false});
+        if (err) {
+            return res.send({message: `Error sending mail` , err, success: false});
+        }
+        res.send({message: `Mail sent`, success: true});
     });
 })
 

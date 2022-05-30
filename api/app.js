@@ -20,23 +20,36 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Origin', 'https://skate-guide.vercel.app'); // update to match the domain you will make the request from
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
 app.use(bodyParser.urlencoded({ extended: true }));
+app.set('trust proxy', 1);
+
+app.use(
+  cors({
+    origin: "https://skate-guide.vercel.app",
+    credentials: true
+  })
+);
 
 // cookie setup
 app.use(
   session({
     key: "userId",
+    proxy: true,
     secret: "tuki",
     resave: false,
     saveUninitialized: false,
     cookie: {
-      expires: 60 * 60 * 24
+      expires: 60 * 60 * 24,
+      path: "/login",
+      sameSite : "none",
+      secure: true,
+      httpOnly: true
     }
   })
 )

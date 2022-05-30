@@ -29,13 +29,6 @@ app.use((req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('trust proxy', 1);
 
-app.use(
-  cors({
-    origin: "https://skate-guide.vercel.app",
-    credentials: true
-  })
-);
-
 // cookie setup
 app.use(
   session({
@@ -46,7 +39,6 @@ app.use(
     saveUninitialized: false,
     cookie: {
       expires: 60 * 60 * 24,
-      path: "/login",
       sameSite : "none",
       secure: true,
       httpOnly: true
